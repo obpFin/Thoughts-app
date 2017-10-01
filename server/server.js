@@ -24,10 +24,10 @@ app.post('/thoughts', (req, res) => {
     _creator: req.user._id
   });
 
-  todo.save().then((doc) => {
+  thought.save().then((doc) => {
     res.send(doc);
   }, (e) => {
-    res.status(400).send();
+    res.status(400).send(e);
   });
 });
 
@@ -35,9 +35,25 @@ app.post('/thoughts', (req, res) => {
 app.get('/thoughts', (req,res) => {
 	Todo.find({
 		_creator: req.user._id
-	}).then( (thoughts) => {
+	}).then((thoughts) => {
 		res.send({thoughts});
 	}, (e) => {
 		res.status(400).send();
+	});
+});
+
+//POST /users
+	app.post('/users', (req,res) => {
+		var user = new User({
+			email: req.body.email,
+			password: req.body.password,
+
+		});
+	user.save().then(() => {
+		return user.generateAuthToken();
+	}).then((token) => {
+		res.header('x-auth', token).send(user)
+	}).catch((e) => {
+		res.status(400).send(e);
 	});
 });
