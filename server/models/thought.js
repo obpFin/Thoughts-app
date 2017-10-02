@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
+const thoughtTypes = ['normal','excited','sad','happy','shocked','crazy'];
 var Thought = mongoose.model('Thought',{
 	text: {
 		type: String,
@@ -8,7 +9,8 @@ var Thought = mongoose.model('Thought',{
 		trim: true
 	},
 	type: {
-		text: String,
+		type: String,
+		enum: thoughtTypes,
 		default: 'normal'
 	},
 	date: {

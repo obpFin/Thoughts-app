@@ -45,3 +45,7 @@ UserSchema.methods.generateAuthToken = function() {
 		return token;
 	});
 };
+
+var User = mongoose.model('User',UserSchema);
+
+module.exports = {User};

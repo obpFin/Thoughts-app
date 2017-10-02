@@ -33,12 +33,12 @@ app.post('/thoughts', (req, res) => {
 
 //GET /thoughts
 app.get('/thoughts', (req,res) => {
-	Todo.find({
+	Thought.find({
 		_creator: req.user._id
 	}).then((thoughts) => {
 		res.send({thoughts});
 	}, (e) => {
-		res.status(400).send();
+		res.status(400).send(e);
 	});
 });
 
@@ -57,3 +57,18 @@ app.get('/thoughts', (req,res) => {
 		res.status(400).send(e);
 	});
 });
+
+app.listen(port, () => {
+	console.log(`started on port ${port}`);
+});
+
+//GET /users
+app.get('/users',(req,res) => {
+	User.find().then((docs) => {
+		res.send(docs)
+	},(e) => {
+		res.status(400).send(e);
+	});
+});
+
+module.exports = {app};
