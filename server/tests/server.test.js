@@ -11,41 +11,6 @@ chai.use(require('chai-http'));
 beforeEach(populateUsers);
 beforeEach(populateThoughts);
 
-describe('POST /thoughts', () => {
-
-  it('should create a new thought', (done) => {
-    let thought = {text: 'Test todo text'};
-
-     chai.request(app)
-      .post('/thoughts')
-      .send(thought)
-      .then((res) => {
-        expect(res).to.have.status(200);
-        expect(res).to.be.json;
-
-        Thought.find().then((thoughts) => {
-          expect(thoughts).to.have.lengthOf(3);
-        });
-        done();
-      })
-      .catch((e) => {
-        done(e);
-      });
-  });
-
-  it('should not create thought with invalid body data', (done) => {
-    chai.request(app)
-      .post('/thoughts')
-      .send({})
-      .then((res) => {
-        return done(new Error('should have failed with 400'));
-      }).catch((e) => {
-        expect(e).to.have.status(400);
-        return done();
-      });
-  });
-});
-
 describe('POST /users', () => {
 
   it('should create a user', (done) => {
@@ -86,6 +51,67 @@ describe('POST /users', () => {
       }).catch((e) => {
         expect(e).to.have.status(400);
         return done();
+      });
+  });
+});
+
+describe('GET /users', () => {
+  it('should get all users', (done) => {
+    chai.request(app)
+      .get('/users')
+      //.set('x-auth', users[0].tokens[0].token)
+      .end((err,res) => {
+        expect(res).to.have.status(200);
+          expect(users).to.have.lengthOf(2);
+          done();
+      });
+  });
+});
+
+describe('POST /thoughts', () => {
+
+  it('should create a new thought', (done) => {
+    let thought = {text: 'Test todo text'};
+
+     chai.request(app)
+      .post('/thoughts')
+      .send(thought)
+      .then((res) => {
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+
+        Thought.find().then((thoughts) => {
+          expect(thoughts).to.have.lengthOf(3);
+        });
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  it('should not create thought with invalid body data', (done) => {
+    chai.request(app)
+      .post('/thoughts')
+      .send({})
+      .then((res) => {
+        return done(new Error('should have failed with 400'));
+      }).catch((e) => {
+        expect(e).to.have.status(400);
+        return done();
+      });
+  });
+});
+
+describe('GET /thoughts', () => {
+  it('should get all thoughts', (done) => {
+    chai.request(app)
+      .get('/thoughts')
+      //.set('x-auth', users[0].tokens[0].token)
+      .end((err,res) => {
+        expect(res).to.have.status(200);
+          expect(thoughts).to.have.lengthOf(2);
+          done();
       });
   });
 });
