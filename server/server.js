@@ -40,6 +40,26 @@ app.get('/thoughts', (req,res) => {
 	});
 });
 
+//GET /thoughts/:id
+app.get('/thoughts/:id', (req,res) => {
+	var id = req.params.id;
+
+	if (!ObjectId.isValid(id)) {
+		return res.sendStatus(404).send();
+	}
+	Thought.findOne({
+		_id: id,
+		//_creator: req.user._id
+	}).then( (thought) => {
+		if (!thought) {
+			res.status(404).send();
+		}
+		res.send({thought})
+	}).catch( (e) => {
+		res.status(400).send();
+	});
+})
+
 //POST /users
 	app.post('/users', (req,res) => {
 		let user = new User({

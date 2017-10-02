@@ -7,7 +7,7 @@ const {Thought} = require('./../models/thought');
 const {User} = require('./../models/user');
 const {thoughts, users, populateThoughts, populateUsers} = require('./seed/seed');
 chai.use(require('chai-http'));
-
+  
 beforeEach(populateUsers);
 beforeEach(populateThoughts);
 
@@ -61,8 +61,9 @@ describe('POST /users', () => {
         }
 
         expect((res) => {
-        expect(res.body._id).to.exist;
-        expect(res.body.email).to.be(email);
+          expect(res).to.have.status(200);
+          expect(res.body._id).to.exist;
+          expect(res.body.email).to.be(email);
         });
 
         User.findOne({email}).then((user) => {
@@ -85,6 +86,33 @@ describe('POST /users', () => {
       }).catch((e) => {
         expect(e).to.have.status(400);
         return done();
+      });
+  });
+});
+
+describe('GET /thoughts/:id',() => {
+  it('should return thought',(done) => {
+        chai.request(app)
+      .get(`/thoughts/${thoughts[0]._id.toHexString()}`)
+      //.set('x-auth', users[0].tokens[0].token)
+      .end((err,res) => {
+        expect(res).to.have.status(200);
+        expect((res) => {
+          expect(res.body.thought.text).to.be(thoughts[0].text);
+        });
+        done();
+      });
+  });
+
+  it('should return 404 if thought is not found', (done) => {
+    var hexId = new ObjectID().toHexString();
+
+    chai.request(app)
+      .get(`/todos/${hexId}`)
+      //.set('x-auth', users[0].tokens[0].token)
+      .end((err,res) => {
+        expect(404);
+        done();
       });
   });
 });
