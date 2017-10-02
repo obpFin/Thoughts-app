@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const thoughtTypes = ['normal','excited','sad','happy','shocked','crazy'];
-var Thought = mongoose.model('Thought',{
+const Thought = mongoose.model('Thought',{
 	text: {
 		type: String,
 		required: true,

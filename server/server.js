@@ -5,19 +5,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
 
-var {mongoose} = require('./db/mongoose');
-var {Thought} = require('./models/thought');
-var {User} = require('./models/user');
-var {authenticate} = require('./authenticate');
+const {mongoose} = require('./db/mongoose');
+const {Thought} = require('./models/thought');
+const {User} = require('./models/user');
+const {authenticate} = require('./authenticate');
 
-var app = express();
+const app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
 //POST /thoughts
 app.post('/thoughts', (req, res) => {
-  var thought = new Thought({
+  let thought = new Thought({
     text: req.body.text,
     type: req.body.type,
     date: req.body.date
@@ -42,7 +42,7 @@ app.get('/thoughts', (req,res) => {
 
 //POST /users
 	app.post('/users', (req,res) => {
-		var user = new User({
+		let user = new User({
 			email: req.body.email,
 			password: req.body.password,
 

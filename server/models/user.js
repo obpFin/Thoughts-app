@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
 
-var UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
@@ -35,9 +35,9 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods.generateAuthToken = function() {
-	var user = this;
-	var access = 'auth';
-	var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
+	const user = this;
+	const access = 'auth';
+	const token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
 
 	user.tokens.push({access, token});
 
@@ -46,6 +46,6 @@ UserSchema.methods.generateAuthToken = function() {
 	});
 };
 
-var User = mongoose.model('User',UserSchema);
+const User = mongoose.model('User',UserSchema);
 
 module.exports = {User};
