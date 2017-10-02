@@ -5,6 +5,9 @@
 - Express.js
 - Mongo/Mongoose.js
 - ?
+### Testing
+- Mocha
+- Chai
 
 ## Client
 
