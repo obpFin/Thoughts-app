@@ -20,8 +20,8 @@ app.post('/thoughts', (req, res) => {
   var thought = new Thought({
     text: req.body.text,
     type: req.body.type,
-    date: req.body.date,
-    _creator: req.user._id
+    date: req.body.date
+    //_creator: req.user._id
   });
 
   thought.save().then((doc) => {
@@ -33,9 +33,7 @@ app.post('/thoughts', (req, res) => {
 
 //GET /thoughts
 app.get('/thoughts', (req,res) => {
-	Thought.find({
-		_creator: req.user._id
-	}).then((thoughts) => {
+	Thought.find().then((thoughts) => {
 		res.send({thoughts});
 	}, (e) => {
 		res.status(400).send(e);

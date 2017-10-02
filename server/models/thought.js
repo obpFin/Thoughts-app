@@ -15,11 +15,12 @@ var Thought = mongoose.model('Thought',{
 	},
 	date: {
 		type: Date,
-		default: null
+		default: Date.now()
 	},
 	_creator: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true
+		required: false,
+		default: null
 	}
 });
 
