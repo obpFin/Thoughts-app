@@ -60,6 +60,31 @@ app.get('/thoughts/:id', (req,res) => {
 	});
 })
 
+//PATCH /thoughts/:id
+app.patch('/thoughts/:id', (req,res) => {
+	var id = req.params.id;
+	var body = _.pick(req.body, ['text', 'type']);
+	if (!ObjectId.isValid(id)) {
+		return res.status(404).send();
+	}
+
+	if (_.isBoolean(body.completed) && body. completed) {
+		body.completedAt = new Date().getTime();
+	} else {
+		body.completed = false;
+		body.completedAt = null;
+	}
+
+	Thought.findOneAndUpdate({_id: id /*_creator: req.user._id*/}, {$set: body}, {new: true}).then((thought) => {
+		if (!thought) {
+			return res.send(404).send();
+		}
+		res.send({thought});
+	}).catch((e) => {
+		res.status(400).send();
+	});
+});
+
 //POST /users
 	app.post('/users', (req,res) => {
 		let user = new User({
