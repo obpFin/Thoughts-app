@@ -14,12 +14,33 @@ body {
 	position: absolute;
 	background-color: #a3bed7;
 	color: white;
-	 display:flex;
+	display:flex;
   align-items: center;
 }
 
-.header > h1 {
+.title > h1 {
 	padding-left: 0.5em;
+	padding-right: 0.2em;
 	font-size: 36px;
+}
+
+.upper-menu {
+	 position: absolute;
+   right: 1em;
+}
+
+.material-icons.md-24 {
+	font-size: 18px;
+}
+
+.material-icons.md-32 {
+  padding-right: 0.5em;
+	font-size: 32px;
+}
+
+.material-icons.md-32.status {
+	padding-right: 0.2em;
+	padding-left: 1em;
 
 }
+
