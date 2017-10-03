@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import { apiUrl } from './../utils/utils'
+import { apiUrl } from './../utils/utils';
+import Header from './Header';
 
 export default class ThoughtsApp extends React.Component {
 	constructor(){
@@ -11,7 +12,7 @@ export default class ThoughtsApp extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.testConnection();
   }
 
@@ -31,7 +32,7 @@ export default class ThoughtsApp extends React.Component {
 
 	render() {
 		return (
-			<h1>Thoughts App</h1>
-			);
+			<Header title="Thoughts" />
+		);
 	}
 }
