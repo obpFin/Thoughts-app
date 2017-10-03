@@ -110,8 +110,10 @@ describe('GET /thoughts', () => {
       //.set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(200);
+        Thought.find().then((thoughts) => {
           expect(thoughts).to.have.lengthOf(2);
           done();
+        });
       });
   });
 });
@@ -131,13 +133,51 @@ describe('GET /thoughts/:id',() => {
   });
 
   it('should return 404 if thought is not found', (done) => {
-    var hexId = new ObjectID().toHexString();
+    let hexId = new ObjectID().toHexString();
 
     chai.request(app)
       .get(`/todos/${hexId}`)
       //.set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(404);
+        done();
+      });
+  });
+});
+
+describe('DELETE /thoughts/:id', () => {
+  it('should delete thought', (done) => {
+    chai.request(app)
+      .delete(`/thoughts/${thoughts[0]._id.toHexString()}`)
+      //.set('x-auth', users[0].tokens[0].token)
+      .end((err,res) => {
+        expect(res).to.have.status(200);
+        Thought.find().then((thoughts) => {
+          expect(thoughts).to.have.lengthOf(1);
+          done();
+        });
+      });
+  });
+
+  it('should return 404 if thought not found', (done) => {
+    var hexId = new ObjectID().toHexString();
+
+    chai.request(app)
+      .delete(`/todos/${hexId}`)
+      //.set('x-auth', users[1].tokens[0].token)
+      .end((err,res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+      
+  });
+
+  it('should return 404 if object id is invalid', (done) => {
+    chai.request(app)
+      .delete('/thoughts/123')
+      //.set('x-auth', users[1].tokens[0].token)
+      .end((err,res) => {
+        expect(res).to.have.status(404);
         done();
       });
   });

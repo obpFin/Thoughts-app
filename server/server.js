@@ -89,4 +89,23 @@ app.get('/users',(req,res) => {
 	});
 });
 
+app.delete('/thoughts/:id', (req,res) => {
+	var id = req.params.id;
+
+	if (!ObjectId.isValid(id)) {
+		return res.status(404).send();
+	}
+	Thought.findOneAndRemove({
+		_id: id,
+		//_creator: req.user._id
+	}).then((thought) => {
+		if (!thought) {
+			res.status(404).send();
+		}
+		res.send({thought});
+	}).catch((e) => {
+		res.status(400).send();
+	});
+});
+
 module.exports = {app};
