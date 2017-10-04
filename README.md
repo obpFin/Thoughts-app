@@ -3,13 +3,15 @@
 ## Server
 
 - Express.js
-- Mongo/Mongoose.js
+- Mongodb w/ Mongoose.js
 - ?
-### Testing
+#### Testing
 - Mocha
 - Chai
+
 
 ## Client
 
 - React.js
+- ES7 class properties
 - ?
