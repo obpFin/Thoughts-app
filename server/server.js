@@ -94,6 +94,7 @@ app.patch('/thoughts/:id', (req,res) => {
 //POST /users
 	app.post('/users', (req,res) => {
 		let user = new User({
+			userName: req.body.userName,
 			email: req.body.email,
 			password: req.body.password,
 

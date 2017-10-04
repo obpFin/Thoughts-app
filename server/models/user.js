@@ -5,6 +5,13 @@ const _ = require('lodash');
 
 
 const UserSchema = new mongoose.Schema({
+	userName: {
+		type: String,
+		required: true,
+		minlength: 3,
+		trim: true,
+		unique: true
+	},
 	email: {
 		type: String,
 		required: true,

@@ -16,10 +16,11 @@ describe('POST /users', () => {
   it('should create a user', (done) => {
     let email = 'example@example.com';
     let password = '123asd';
+    let userName = 'testUser';
 
     chai.request(app)
       .post('/users')
-      .send({email,password})
+      .send({userName,email,password})
       .end((err,res) => {
         if (err) {
           return done(err);
@@ -28,6 +29,7 @@ describe('POST /users', () => {
         expect((res) => {
           expect(res).to.have.status(200);
           expect(res.body._id).to.exist;
+          expect(res.body.userName).to.exist;
           expect(res.body.email).to.be(email);
         });
 
