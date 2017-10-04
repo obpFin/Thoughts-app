@@ -4,6 +4,7 @@ import HeaderMenu from './HeaderMenu'
 
 const Header = (props) => {
     return (
+    	<div id="header-container">
     	<table>
     		<tbody>
       		<tr className="header">
@@ -17,6 +18,7 @@ const Header = (props) => {
       		</tr>
     		</tbody>
     	</table>
+    	</div>
     );
   };
 

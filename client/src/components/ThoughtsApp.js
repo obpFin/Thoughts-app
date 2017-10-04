@@ -3,36 +3,36 @@ import axios from 'axios';
 
 import { apiUrl } from './../utils/utils';
 import Header from './Header';
+import Thought from './Thought';
 
 export default class ThoughtsApp extends React.Component {
-	constructor(){
-    super();
-    this.state = {
-      thoughts: {}
-    };
-  }
+	state = {
+    thoughts: {}
+  };
 
-  componentDidMount() {
-    this.testConnection();
-  }
-
-  testConnection() {
-  	var self = this;
+  testConnection = () => {
+   	var self = this;
     axios.get(`${apiUrl}/thoughts`)
 	    .then(function (response) {
 	      self.setState({
 	        thoughts: response.data.thoughts
 	      });
-	      console.log(self.state);
 	    })
 	    .catch(function (error) {
 	      console.log(error);
 	    });
+  };
+
+  componentDidMount() {
+    this.testConnection();
   }
 
 	render() {
 		return (
-			<Header title="Thoughts" />
+			<div className="main-wrapper">
+				<Header title="Thoughts" />
+				<Thought />
+			</div>
 		);
 	}
 }

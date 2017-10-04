@@ -8,6 +8,15 @@ body {
 	font-family: 'Enriqueta', serif;
 }
 
+.main-wrapper {
+  height:100vh;
+}
+
+#header-container {
+	width: 100%;
+	min-height: 10%;
+}
+
 .header {
 	width: 100%;
 	height: 10%;
@@ -35,12 +44,20 @@ body {
 
 .material-icons.md-32 {
   padding-right: 0.5em;
-	font-size: 32px;
+	font-size: 2.5em;
 }
 
 .material-icons.md-32.status {
 	padding-right: 0.2em;
 	padding-left: 1em;
 
+}
+
+.thought-container {
+	display: block;
+	position: relative;
+	height: 4em;
+	width: 2em;
+	border-color: #a3bed7;
 }
 
