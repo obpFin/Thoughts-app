@@ -17,10 +17,14 @@ const Thought = mongoose.model('Thought',{
 		type: Date,
 		default: Date.now()
 	},
-	_creator: {
+	_creatorId: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: false,
 		default: null
+	},
+	_creatorName: {
+		type: String,
+		required: true,
 	}
 });
 

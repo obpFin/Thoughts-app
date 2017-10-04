@@ -26,7 +26,8 @@ app.post('/thoughts', (req, res) => {
   let thought = new Thought({
     text: req.body.text,
     type: req.body.type,
-    date: req.body.date
+    date: req.body.date,
+    _creatorName: req.body._creatorName
     //_creator: req.user._id
   });
 

@@ -73,7 +73,7 @@ describe('GET /users', () => {
 describe('POST /thoughts', () => {
 
   it('should create a new thought', (done) => {
-    let thought = {text: 'Test todo text'};
+    let thought = {text: 'Test todo text', _creatorName: "testUser"};
 
      chai.request(app)
       .post('/thoughts')

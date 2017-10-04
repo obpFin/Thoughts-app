@@ -29,12 +29,14 @@ const users = [{
 const thoughts = [{
   _id: new ObjectID(),
   text: 'First test-thought',
-  _creator: userOneId
+  _creator: userOneId,
+  _creatorName: 'testUser1'
 }, {
   _id: new ObjectID(),
   text: 'Second test-thought',
   type: 'happy',
-  _creator: userTwoId
+  _creator: userTwoId,
+  _creatorName: 'testUser2'
 }];
 
 const populateThoughts = (done) => {
