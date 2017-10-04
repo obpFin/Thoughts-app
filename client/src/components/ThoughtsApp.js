@@ -17,6 +17,8 @@ export default class ThoughtsApp extends React.Component {
 	      self.setState({
 	        thoughts: response.data.thoughts
 	      });
+    		console.log(self.state.thoughts);
+
 	    })
 	    .catch(function (error) {
 	      console.log(error);
@@ -31,7 +33,7 @@ export default class ThoughtsApp extends React.Component {
 		return (
 			<div className="main-wrapper">
 				<Header title="Thoughts" />
-				<Thought />
+				<Thought thoughts={this.state.thoughts[1]}/>
 			</div>
 		);
 	}

@@ -12,6 +12,10 @@ body {
   height:100vh;
 }
 
+.main-color {
+	color: #a3bed7;
+}
+
 #header-container {
 	width: 100%;
 	min-height: 10%;
@@ -54,10 +58,12 @@ body {
 }
 
 .thought-container {
-	display: block;
+	display: inline-block;
 	position: relative;
-	height: 4em;
-	width: 2em;
+	padding: 1em;
+	margin: 2em;
+	border-style: solid;
 	border-color: #a3bed7;
+	border-radius: 20%;
 }
 
