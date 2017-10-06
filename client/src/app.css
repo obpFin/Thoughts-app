@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Enriqueta');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
 
 body {
   margin: 0;
@@ -57,13 +58,30 @@ body {
 
 }
 
-.thought-container {
+.thoughts-container {
+	text-align: center;
 	display: inline-block;
 	position: relative;
-	padding: 1em;
+	margin: 2em;
+	border-bottom: 6px solid;
+	border-color: #a3bed7;
+}
+
+.creator {
+	font-family: 'Enriqueta', serif;
+	 color: #70bdf2;
+}
+
+.thought-container {
+	font-family: 'Gloria Hallelujah', cursive;
+	display: inline-block;
+	background-color: #edf4fe;
+	position: relative;
+	padding: 2em;
 	margin: 2em;
 	border-style: solid;
-	border-color: #a3bed7;
-	border-radius: 20%;
+	border-color: #70bdf2;
+	border-radius: 40%;
+	border-style: dotted;
 }
 

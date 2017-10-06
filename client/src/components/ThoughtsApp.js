@@ -3,11 +3,12 @@ import axios from 'axios';
 
 import { apiUrl } from './../utils/utils';
 import Header from './Header';
+import ThoughtContainer from './ThoughtContainer';
 import Thought from './Thought';
 
 export default class ThoughtsApp extends React.Component {
 	state = {
-    thoughts: {}
+    thoughts: null
   };
 
   testConnection = () => {
@@ -33,8 +34,10 @@ export default class ThoughtsApp extends React.Component {
 		return (
 			<div className="main-wrapper">
 				<Header title="Thoughts" />
-				<Thought thoughts={this.state.thoughts[1]}/>
+				{this.state.thoughts && 
+					<ThoughtContainer thoughts={this.state.thoughts}/>
+				}
 			</div>
 		);
 	}
-}
+};
