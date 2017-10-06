@@ -9,7 +9,7 @@ const Header = (props) => {
     		<tbody>
       		<tr className="header">
 	      		<td className="title">
-	      			<h1 >{props.title}</h1>
+	      			<h1>{props.title}</h1>
 	      		</td>
 	      		<td>
 	        		<i className="material-icons md-24">chat_bubble</i>

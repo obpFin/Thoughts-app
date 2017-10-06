@@ -5,7 +5,7 @@ import Thought from './Thought';
 export default class ThoughtContainer extends React.Component {
 
   mapThoughts = (props => props.thoughts.map((item) => {
-  		return <Thought key={item._id} thought = {item} />
+  	return <Thought key={item._id} thought = {item} />
   }));
   	
   render () {

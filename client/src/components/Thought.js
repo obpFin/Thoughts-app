@@ -9,5 +9,4 @@ const Thought = (props) => {
   );
 };
 
-
 export default Thought;

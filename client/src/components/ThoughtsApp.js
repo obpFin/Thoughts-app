@@ -11,15 +11,13 @@ export default class ThoughtsApp extends React.Component {
     thoughts: null
   };
 
-  testConnection = () => {
+  getThoughts = () => {
    	var self = this;
     axios.get(`${apiUrl}/thoughts`)
 	    .then(function (response) {
 	      self.setState({
 	        thoughts: response.data.thoughts
 	      });
-    		console.log(self.state.thoughts);
-
 	    })
 	    .catch(function (error) {
 	      console.log(error);
@@ -27,7 +25,7 @@ export default class ThoughtsApp extends React.Component {
   };
 
   componentDidMount() {
-    this.testConnection();
+    this.getThoughts();
   }
 
 	render() {

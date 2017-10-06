@@ -5,9 +5,7 @@ const HeaderMenu = (props) => {
 			<td className="upper-menu">
 	  		<i className="material-icons md-32">add_circle</i>
 	  		<i className="material-icons md-32">account_circle</i>
-	  		<i className="material-icons md-32">home</i>
 	  		<i className="material-icons md-32 status">power_settings_new</i>
-
 			</td>
     );
   };

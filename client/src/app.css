@@ -69,11 +69,12 @@ body {
 
 .creator {
 	font-family: 'Enriqueta', serif;
-	 color: #70bdf2;
+	color: #70bdf2;
 }
 
 .thought-container {
 	font-family: 'Gloria Hallelujah', cursive;
+	font-size: 1.7em;
 	display: inline-block;
 	background-color: #edf4fe;
 	position: relative;
