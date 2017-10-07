@@ -98,7 +98,6 @@ app.patch('/thoughts/:id', (req,res) => {
 			userName: req.body.userName,
 			email: req.body.email,
 			password: req.body.password,
-
 		});
 	user.save().then(() => {
 		return user.generateAuthToken();
@@ -107,10 +106,6 @@ app.patch('/thoughts/:id', (req,res) => {
 	}).catch((e) => {
 		res.status(400).send(e);
 	});
-});
-
-app.listen(port, () => {
-	console.log(`started on port ${port}`);
 });
 
 //GET /users
@@ -139,6 +134,15 @@ app.delete('/thoughts/:id', (req,res) => {
 	}).catch((e) => {
 		res.status(400).send();
 	});
+});
+
+//GET /users/me
+app.get('/users/me', authenticate, (req,res) => {
+ 	res.send(req.user);
+});
+
+app.listen(port, () => {
+	console.log(`started on port ${port}`);
 });
 
 module.exports = {app};
