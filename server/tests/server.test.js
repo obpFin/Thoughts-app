@@ -34,7 +34,7 @@ describe('POST /users', () => {
 
         User.findOne({email}).then((user) => {
           expect(user).to.exist;
-          //expect(user.password).to.not.be(password);
+          expect(user.password).to.not.equal(password);
           done();
         }).catch((e) => done(e));
       });
@@ -103,7 +103,7 @@ describe('GET /users', () => {
   it('should get all users', (done) => {
     chai.request(app)
       .get('/users')
-      //.set('x-auth', users[0].tokens[0].token)
+      .set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(200);
           expect(users).to.have.lengthOf(2);
@@ -180,6 +180,7 @@ describe('GET /thoughts/all', () => {
   it('should get all thoughts', (done) => {
     chai.request(app)
       .get('/thoughts/all')
+      .set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(200);
         Thought.find().then((thoughts) => {
@@ -207,7 +208,7 @@ describe('GET /thoughts/:id',() => {
   it('should return thought',(done) => {
         chai.request(app)
       .get(`/thoughts/${thoughts[0]._id.toHexString()}`)
-      //.set('x-auth', users[0].tokens[0].token)
+      .set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(200);
         expect((res) => {
@@ -222,7 +223,7 @@ describe('GET /thoughts/:id',() => {
 
     chai.request(app)
       .get(`/todos/${hexId}`)
-      //.set('x-auth', users[0].tokens[0].token)
+      .set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(404);
         done();
@@ -265,5 +266,42 @@ describe('DELETE /thoughts/:id', () => {
         expect(res).to.have.status(404);
         done();
       });
+  });
+});
+
+describe('PATCH /thoughts/:id', () => {
+  it('should update the thought',(done) => {
+    var hexId = thoughts[1]._id.toHexString();
+    var text = 'new text';
+
+      chai.request(app)
+        .patch(`/thoughts/${hexId}`)
+        .set('x-auth', users[1].tokens[0].token)
+        .send({
+          text
+        })
+        .end((err,res) => {
+          expect(res).to.have.status(200);
+            expect(res.body.thought.text).to.be.a('string');
+            expect(res.body.thought.text).to.equal(text);
+            done();
+        });
+
+  });
+
+  it('should not update the thought created by other user',(done) => {
+    var hexId = thoughts[0]._id.toHexString();
+    var text = 'new text';
+
+      chai.request(app)
+        .patch(`/thoughts/${hexId}`)
+        .set('x-auth', users[1].tokens[0].token)
+        .send({
+          text
+        })
+        .end((err,res) => {
+          expect(res).to.have.status(404);
+          done();
+        });
   });
 });

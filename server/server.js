@@ -39,7 +39,7 @@ app.post('/thoughts', authenticate, (req, res) => {
 });
 
 //GET /thoughts/all
-app.get('/thoughts/all', (req,res) => {
+app.get('/thoughts/all', authenticate, (req,res) => {
 	Thought.find().then((thoughts) => {
 		res.send({thoughts});
 	}, (e) => {
@@ -59,7 +59,7 @@ app.get('/thoughts', authenticate, (req,res) => {
 });
 
 //GET /thoughts/:id
-app.get('/thoughts/:id', (req,res) => {
+app.get('/thoughts/:id', authenticate, (req,res) => {
 	var id = req.params.id;
 
 	if (!ObjectId.isValid(id)) {
@@ -67,7 +67,7 @@ app.get('/thoughts/:id', (req,res) => {
 	}
 	Thought.findOne({
 		_id: id,
-		//_creator: req.user._id
+		_creatorId: req.user._id
 	}).then( (thought) => {
 		if (!thought) {
 			res.status(404).send();
@@ -79,7 +79,7 @@ app.get('/thoughts/:id', (req,res) => {
 })
 
 //PATCH /thoughts/:id
-app.patch('/thoughts/:id', (req,res) => {
+app.patch('/thoughts/:id', authenticate, (req,res) => {
 	var id = req.params.id;
 	var body = _.pick(req.body, ['text', 'type']);
 	if (!ObjectId.isValid(id)) {
@@ -93,9 +93,9 @@ app.patch('/thoughts/:id', (req,res) => {
 		body.completedAt = null;
 	}
 
-	Thought.findOneAndUpdate({_id: id /*_creator: req.user._id*/}, {$set: body}, {new: true}).then((thought) => {
+	Thought.findOneAndUpdate({_id: id, _creatorId: req.user._id}, {$set: body}, {new: true}).then((thought) => {
 		if (!thought) {
-			return res.send(404).send();
+			return res.sendStatus(404);
 		}
 		res.send({thought});
 	}).catch((e) => {
