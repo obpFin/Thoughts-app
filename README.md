@@ -5,6 +5,10 @@
 - Express.js
 - Mongodb w/ Mongoose.js
 - ?
+#### Security
+- JSON Web Tokens
+- Bcrypt hashing
+
 #### Testing
 - Mocha
 - Chai
