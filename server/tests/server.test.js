@@ -12,7 +12,6 @@ beforeEach(populateUsers);
 beforeEach(populateThoughts);
 
 describe('POST /users', () => {
-
   it('should create a user', (done) => {
     let email = 'example@example.com';
     let password = '123asd';
@@ -57,6 +56,49 @@ describe('POST /users', () => {
   });
 });
 
+describe('POST /users/login', () => {
+  it('should login user and return auth token', (done) => {
+    chai.request(app)
+      .post('/users/login')
+      .send({
+        email: users[1].email,
+        password: users[1].password
+      })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res).to.have.status(200);
+        expect(res.headers['x-auth']).to.exist;
+        User.findById(users[1]).then((user) => {
+          expect(user.tokens[1]).to.include({
+            access: 'auth',
+            token: res.headers['x-auth']
+          });
+          done();
+        }).catch((e) => done(e));
+      });
+  });
+
+  it('should reject invalid login', (done) => {
+    chai.request(app)
+      .post('/users/login')
+      .send({
+        email: users[1].email,
+        password: 'asd'
+      })
+      .then((res) => {
+        return done(new Error('should have failed with 400'));
+      }).catch((e) => {
+        expect(e).to.have.status(400);
+        User.findById(users[1]).then((user) => {
+          expect(user.tokens.length).to.equal(1);
+        return done();
+        });
+      });
+  });
+});
+
 describe('GET /users', () => {
   it('should get all users', (done) => {
     chai.request(app)
@@ -66,6 +108,33 @@ describe('GET /users', () => {
         expect(res).to.have.status(200);
           expect(users).to.have.lengthOf(2);
           done();
+      });
+  });
+});
+
+describe('GET users/me', () => {
+  it('should return user if authenticated', (done) => {
+    chai.request(app)
+      .get('/users/me')
+      .set('x-auth', users[0].tokens[0].token)
+      .end((err,res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res).to.have.status(200);
+        expect(res.body._id).to.equal(users[0]._id.toHexString());
+        expect(res.body.email).to.equal(users[0].email);
+        done();
+      });
+  });
+
+  it('should return 401 if not authenticated', (done) => {
+    chai.request(app)
+      .get('/users/me')
+      .end((err,res) => {
+        expect(res).to.have.status(401);
+        expect(res.body).to.deep.equal({});
+        done();
       });
   });
 });
