@@ -142,10 +142,11 @@ describe('GET users/me', () => {
 describe('POST /thoughts', () => {
 
   it('should create a new thought', (done) => {
-    let thought = {text: 'Test todo text', _creatorName: "testUser"};
+    let thought = {text: 'Test todo text'};
 
      chai.request(app)
       .post('/thoughts')
+      .set('x-auth', users[0].tokens[0].token)
       .send(thought)
       .then((res) => {
         expect(res).to.have.status(200);
@@ -164,6 +165,7 @@ describe('POST /thoughts', () => {
   it('should not create thought with invalid body data', (done) => {
     chai.request(app)
       .post('/thoughts')
+      .set('x-auth', users[0].tokens[0].token)
       .send({})
       .then((res) => {
         return done(new Error('should have failed with 400'));
@@ -174,17 +176,29 @@ describe('POST /thoughts', () => {
   });
 });
 
-describe('GET /thoughts', () => {
+describe('GET /thoughts/all', () => {
   it('should get all thoughts', (done) => {
     chai.request(app)
-      .get('/thoughts')
-      //.set('x-auth', users[0].tokens[0].token)
+      .get('/thoughts/all')
       .end((err,res) => {
         expect(res).to.have.status(200);
         Thought.find().then((thoughts) => {
           expect(thoughts).to.have.lengthOf(2);
           done();
         });
+      });
+  });
+});
+
+describe('GET /thoughts', () => {
+  it('should get all the users thoughts', (done) => {
+    chai.request(app)
+      .get('/thoughts')
+      .set('x-auth', users[0].tokens[0].token)
+      .end((err,res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.thoughts).to.have.lengthOf(1);
+        done();
       });
   });
 });
@@ -220,7 +234,7 @@ describe('DELETE /thoughts/:id', () => {
   it('should delete thought', (done) => {
     chai.request(app)
       .delete(`/thoughts/${thoughts[0]._id.toHexString()}`)
-      //.set('x-auth', users[0].tokens[0].token)
+      .set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(200);
         Thought.find().then((thoughts) => {
@@ -235,7 +249,7 @@ describe('DELETE /thoughts/:id', () => {
 
     chai.request(app)
       .delete(`/todos/${hexId}`)
-      //.set('x-auth', users[1].tokens[0].token)
+      .set('x-auth', users[1].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(404);
         done();
@@ -246,7 +260,7 @@ describe('DELETE /thoughts/:id', () => {
   it('should return 404 if object id is invalid', (done) => {
     chai.request(app)
       .delete('/thoughts/123')
-      //.set('x-auth', users[1].tokens[0].token)
+      .set('x-auth', users[1].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(404);
         done();

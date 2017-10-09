@@ -19,7 +19,7 @@ const Thought = mongoose.model('Thought',{
 	},
 	_creatorId: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: false,
+		required: true,
 		default: null
 	},
 	_creatorName: {

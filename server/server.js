@@ -22,13 +22,13 @@ app.use(function(req, res, next) {
 });
 
 //POST /thoughts
-app.post('/thoughts', (req, res) => {
+app.post('/thoughts', authenticate, (req, res) => {
   let thought = new Thought({
     text: req.body.text,
     type: req.body.type,
     date: req.body.date,
-    _creatorName: req.body._creatorName
-    //_creator: req.user._id
+    _creatorName: req.user.userName,
+    _creatorId: req.user._id
   });
 
   thought.save().then((doc) => {
@@ -38,9 +38,20 @@ app.post('/thoughts', (req, res) => {
   });
 });
 
-//GET /thoughts
-app.get('/thoughts', (req,res) => {
+//GET /thoughts/all
+app.get('/thoughts/all', (req,res) => {
 	Thought.find().then((thoughts) => {
+		res.send({thoughts});
+	}, (e) => {
+		res.status(400).send(e);
+	});
+});
+
+//GET /thoughts
+app.get('/thoughts', authenticate, (req,res) => {
+	Thought.find({
+		_creatorId: req.user._id
+	}).then((thoughts) => {
 		res.send({thoughts});
 	}, (e) => {
 		res.status(400).send(e);
@@ -117,7 +128,8 @@ app.get('/users',(req,res) => {
 	});
 });
 
-app.delete('/thoughts/:id', (req,res) => {
+//DELETE /thoughts:id
+app.delete('/thoughts/:id', authenticate, (req,res) => {
 	var id = req.params.id;
 
 	if (!ObjectId.isValid(id)) {
@@ -125,7 +137,7 @@ app.delete('/thoughts/:id', (req,res) => {
 	}
 	Thought.findOneAndRemove({
 		_id: id,
-		//_creator: req.user._id
+		_creatorId: req.user._id
 	}).then((thought) => {
 		if (!thought) {
 			res.status(404).send();

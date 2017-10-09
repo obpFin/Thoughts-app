@@ -29,13 +29,13 @@ const users = [{
 const thoughts = [{
   _id: new ObjectID(),
   text: 'First test-thought',
-  _creator: userOneId,
+  _creatorId: userOneId,
   _creatorName: 'testUser1'
 }, {
   _id: new ObjectID(),
   text: 'Second test-thought',
   type: 'happy',
-  _creator: userTwoId,
+  _creatorId: userTwoId,
   _creatorName: 'testUser2'
 }];
 
