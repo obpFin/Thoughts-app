@@ -39,7 +39,7 @@ app.post('/thoughts', authenticate, (req, res) => {
 });
 
 //GET /thoughts/all
-app.get('/thoughts/all', authenticate, (req,res) => {
+app.get('/thoughts/all', (req,res) => {
 	Thought.find().then((thoughts) => {
 		res.send({thoughts});
 	}, (e) => {

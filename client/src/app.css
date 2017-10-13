@@ -32,6 +32,10 @@ body {
   align-items: center;
 }
 
+.title:hover, .add-thought:hover, .account:hover, .settings:hover {
+	cursor: pointer;
+}
+
 .title > h1 {
 	padding-left: 0.5em;
 	padding-right: 0.2em;
@@ -52,10 +56,9 @@ body {
 	font-size: 2.5em;
 }
 
-.material-icons.md-32.status {
+.material-icons.md-32.settings {
 	padding-right: 0.2em;
 	padding-left: 1em;
-
 }
 
 .thoughts-container {

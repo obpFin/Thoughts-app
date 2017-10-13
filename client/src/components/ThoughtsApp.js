@@ -13,7 +13,7 @@ export default class ThoughtsApp extends React.Component {
 
   getThoughts = () => {
    	var self = this;
-    axios.get(`${apiUrl}/thoughts`)
+    axios.get(`${apiUrl}/thoughts/all`)
 	    .then(function (response) {
 	      self.setState({
 	        thoughts: response.data.thoughts

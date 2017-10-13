@@ -1,11 +1,17 @@
 import React from 'react';
+import AddThoughtModal from './AddThoughtModal';
 
 const HeaderMenu = (props) => {
     return (
+
 			<td className="upper-menu">
-	  		<i className="material-icons md-32">add_circle</i>
-	  		<i className="material-icons md-32">account_circle</i>
-	  		<i className="material-icons md-32 status">power_settings_new</i>
+	  		<a onClick={props.handleToggleThought} className="add-thought material-icons md-32">add_circle</a>
+	  		<a className="account material-icons md-32">account_circle</a>
+	  		<a className="settings material-icons md-32">power_settings_new</a>
+				<AddThoughtModal 
+					isOpen = {props.addThoughtOpen} 
+					handleToggleThought = {props.handleToggleThought}
+				/>
 			</td>
     );
   };
