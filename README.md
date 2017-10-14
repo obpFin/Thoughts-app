@@ -4,7 +4,6 @@
 
 - Express.js
 - Mongodb w/ Mongoose.js
-- ?
 #### Security
 - JSON Web Tokens
 - Bcrypt hashing
@@ -18,4 +17,4 @@
 
 - React.js
 - ES7 class properties
-- ?
+- SCSS
