@@ -1,0 +1,17 @@
+$main-font: 'Enriqueta', serif;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #f5f5f5;
+	font-family: $main-font;
+}
+
+.main-wrapper {
+  height:100vh;
+}
+
+.main-color {
+	color: #a3bed7;
+}
