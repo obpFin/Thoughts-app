@@ -17,4 +17,6 @@
 
 - React.js
 - ES7 class properties
+#### Styling
 - SCSS
+- Normalize.css
