@@ -5,10 +5,13 @@ import { apiUrl } from './../utils/utils';
 import Header from './Header';
 import ThoughtContainer from './ThoughtContainer';
 import Thought from './Thought';
+import Profile from './Profile';
 
 export default class ThoughtsApp extends React.Component {
 	state = {
-    thoughts: null
+    thoughts: null,
+    indexOpen: true,
+    profileOpen: false
   };
 
   getThoughts = () => {
@@ -26,15 +29,35 @@ export default class ThoughtsApp extends React.Component {
 
   componentDidMount() {
     this.getThoughts();
-  }
+  };
+
+  handleToggleProfile = () => {
+    console.log("profile",this.state.profileOpen,"index",this.state.indexOpen);
+
+  	this.setState(() => ({
+      profileOpen: !this.state.profileOpen,
+      indexOpen: !this.state.indexOpen
+    }));
+    console.log("profile",this.state.profileOpen,"index",this.state.indexOpen);
+
+  };
 
 	render() {
 		return (
 			<div className="main-wrapper">
-				<Header title="Thoughts" />
+				<Header 
+					title="Thoughts" 
+					handleToggleProfile={this.handleToggleProfile}
+				/>
+				{this.state.profileOpen &&
+					<Profile 
+						thoughts={this.state.thoughts ? this.state.thoughts : "jees"}
+					/>
+				}
 				{this.state.thoughts && 
 					<ThoughtContainer thoughts={this.state.thoughts}/>
 				}
+				
 			</div>
 		);
 	}

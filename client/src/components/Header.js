@@ -13,14 +13,19 @@ export default class Header extends React.Component {
 
   handleTitleClick = () => {
     //todo: location == development || production
-    window.location.href = `http://localhost:8080`;
+    window.location.href = `http://localhost:8081`;
   };
 
   handleToggleThought = () => {
     this.setState(() => ({
       addThoughtOpen: !this.state.addThoughtOpen
     }));
-  }
+  };
+
+  handleToggleProfile = () => {
+    console.log("Header.js toggle");
+    this.props.handleToggleProfile;
+  };
 
   render() {
     return (
@@ -36,6 +41,7 @@ export default class Header extends React.Component {
 	      		</td>
 	      		<HeaderMenu 
               handleToggleThought={this.handleToggleThought}
+              handleToggleProfile={this.props.handleToggleProfile}
               addThoughtOpen={this.state.addThoughtOpen}
             />
       		</tr>
