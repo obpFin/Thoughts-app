@@ -5,6 +5,7 @@ var authenticate = (req,res,next) => {
 
 		User.findByToken(token).then((user) => {
 			if (!user) {
+				console.log('user not found');
 				return Promise.reject();
 			}
 
@@ -12,6 +13,7 @@ var authenticate = (req,res,next) => {
 			req.token = token;
 			next();
 		}).catch((e) => {
+			console.log('authentication error');
 			res.status(401).send();
 		});
 };
