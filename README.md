@@ -7,6 +7,7 @@
 #### Security
 - JSON Web Tokens
 - Bcrypt hashing
+- Express Sanitizer
 
 #### Testing
 - Mocha
