@@ -2,6 +2,7 @@ require('./config/config');
 
 const _ = require('lodash');
 const express = require('express');
+const expressSanitizer = require('express-sanitizer');
 const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
 
@@ -14,7 +15,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
-
+app.use(expressSanitizer());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -23,6 +24,7 @@ app.use(function(req, res, next) {
 
 //POST /thoughts
 app.post('/thoughts', authenticate, (req, res) => {
+	req.body.text = req.sanitize(req.body.text);
   let thought = new Thought({
     text: req.body.text,
     type: req.body.type,
@@ -80,6 +82,7 @@ app.get('/thoughts/:id', authenticate, (req,res) => {
 
 //PATCH /thoughts/:id
 app.patch('/thoughts/:id', authenticate, (req,res) => {
+	req.body.text = req.sanitize(req.body.text);
 	var id = req.params.id;
 	var body = _.pick(req.body, ['text', 'type']);
 	if (!ObjectId.isValid(id)) {
