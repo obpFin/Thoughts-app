@@ -2,7 +2,8 @@ $main-color: #a3bed7;
 
 .thoughts-container {
 	text-align: center;
-	display: inline-block;
+	display: flex;
+	justify-content: center;
 	position: relative;
 	margin: 2em;
 	border-bottom: 6px solid;
