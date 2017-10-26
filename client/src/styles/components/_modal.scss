@@ -18,14 +18,13 @@
 }
 
 .modal {
-    background: $main-color;
-    color: white;
-    max-width: 30em;
-    outline: none;
-    padding: 3em;
-    text-align: center;
-
-    border-style: solid;
+  background: $main-color;
+  color: white;
+  max-width: 30em;
+  outline: none;
+  padding: 3em;
+  text-align: center;
+  border-style: solid;
 	border-color: #70bdf2;
 	border-radius: 1%;
 }
@@ -43,10 +42,8 @@
   font-weight: 300;
   margin: 0 0 50px 0;
   word-break: break-all;
-
   border-style: solid;
 	border-color: #70bdf2;
-	border-radius: 40%;
 }
 
 .submit-thought {
@@ -59,5 +56,4 @@
   font-weight: bold;
   letter-spacing: 2px;
   width: 40%;
-
 }
