@@ -6,6 +6,8 @@ const AddThoughtModal = (props) => (
       isOpen={props.isOpen}
       contentLabel="add a Thought"
       onRequestClose={props.handleToggleThought}
+      closeTimeoutMS={200}
+      className="modal"
   >
       <h3>Under construction</h3>
   </Modal>
