@@ -57,3 +57,13 @@
   letter-spacing: 2px;
   width: 40%;
 }
+
+@media (max-width: 414px) {
+  .ReactModalPortal .ReactModal__Content {
+    max-width: 300px;
+  }
+
+  .text-area {
+    max-width: 240px;
+  }
+}
