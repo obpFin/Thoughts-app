@@ -1,11 +1,15 @@
-$main-color: #a3bed7;
-
 .thoughts-container {
 	text-align: center;
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
 	position: relative;
-	margin: 2em;
 	border-bottom: 6px solid;
 	border-color: $main-color;
+}
+
+@media (max-width: 414px) {
+	.thoughts-container {
+		flex-direction: column;
+	}
 }
