@@ -1,5 +1,5 @@
 # Thoughts-app
-
+*a fully responsive web-app to share your thoughts!*
 ## Server
 
 - Express.js
