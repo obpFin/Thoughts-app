@@ -10,11 +10,12 @@ export default class ThoughtContainer extends React.Component {
   	
   render () {
   	return (
-  		<div className="thoughts-container">
-  			{this.props.thoughts &&
-  				this.mapThoughts(this.props)
-  			}
-  		</div>
+      <div className="thoughts-container">
+        {this.props.thoughts &&
+    			this.props.thoughts &&
+    			this.mapThoughts(this.props)
+        }
+      </div>
   	);
 	}
 };

@@ -6,10 +6,12 @@ import Header from './Header';
 import ThoughtContainer from './ThoughtContainer';
 import Thought from './Thought';
 import Profile from './Profile';
+import Login from './login';
 
 export default class ThoughtsApp extends React.Component {
 	state = {
     thoughts: null,
+    loggedIn: false,
     indexOpen: true,
     profileOpen: false
   };
@@ -48,14 +50,17 @@ export default class ThoughtsApp extends React.Component {
 				<Header 
 					title="Thoughts" 
 					handleToggleProfile={this.handleToggleProfile}
+					showButtons={this.state.loggedIn}
 				/>
 				{this.state.profileOpen &&
 					<Profile 
 						thoughts={this.state.thoughts ? this.state.thoughts : "jees"}
 					/>
 				}
-				{this.state.thoughts && 
+				{this.state.loggedIn ? 
 					<ThoughtContainer thoughts={this.state.thoughts}/>
+					:
+					<Login />
 				}
 				
 			</div>

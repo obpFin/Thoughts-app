@@ -43,6 +43,7 @@ export default class Header extends React.Component {
               handleToggleThought={this.handleToggleThought}
               handleToggleProfile={this.props.handleToggleProfile}
               addThoughtOpen={this.state.addThoughtOpen}
+              showButtons={this.props.showButtons}
             />
       		</tr>
     		</tbody>
