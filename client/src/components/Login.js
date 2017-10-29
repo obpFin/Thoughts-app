@@ -15,7 +15,7 @@ const Login = (props) => {
 				  	<input id="submit-form" type="submit" value="Log in" />
 				  </div>
 				</form>
-				<a href="">I just want to take a look around</a>
+				<a href="#" onClick={() => props.handleAnynomousLogin()}>I just want to take a look around</a>
 			</div>
 				    );
   };

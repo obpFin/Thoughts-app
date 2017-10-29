@@ -12,17 +12,17 @@ export default class Profile extends React.Component {
 	};
 
   getProfileThoughts = () => {
- 	var self = this;
-  axios.get(`${apiUrl}/users/me`)
-    .then(function (response) {
-    	console.log(response);
-      // self.setState({
-      //   thoughts: response.data.thoughts
-      // });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+   	var self = this;
+    axios.get(`${apiUrl}/users/me`)
+      .then(function (response) {
+      	console.log(response);
+        // self.setState({
+        //   thoughts: response.data.thoughts
+        // });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   componentDidMount() {

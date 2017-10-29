@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { apiUrl } from './../utils/utils';
+import { login } from './../utils/api/api';
 import Header from './Header';
 import ThoughtContainer from './ThoughtContainer';
 import Thought from './Thought';
@@ -11,7 +12,8 @@ import Login from './login';
 export default class ThoughtsApp extends React.Component {
 	state = {
     thoughts: null,
-    loggedIn: false,
+    session: false,
+    user: ["userName": null, "x-auth": null],
     indexOpen: true,
     profileOpen: false
   };
@@ -20,13 +22,23 @@ export default class ThoughtsApp extends React.Component {
    	var self = this;
     axios.get(`${apiUrl}/thoughts/all`)
 	    .then(function (response) {
-	      self.setState({
+	    	self.setState(() => ({
 	        thoughts: response.data.thoughts
-	      });
+    		}));
 	    })
 	    .catch(function (error) {
 	      console.log(error);
 	    });
+  };
+
+  handleAnynomousLogin = () => {
+   	let credentials = {email: "test35464@example.com", password: "123456"};
+   	if (login(credentials)) {
+   		this.setState(() => ({
+      	session:true
+    }));
+   	}
+   	
   };
 
   componentDidMount() {
@@ -57,10 +69,10 @@ export default class ThoughtsApp extends React.Component {
 						thoughts={this.state.thoughts ? this.state.thoughts : "jees"}
 					/>
 				}
-				{this.state.loggedIn ? 
+				{this.state.session ? 
 					<ThoughtContainer thoughts={this.state.thoughts}/>
 					:
-					<Login />
+					<Login handleAnynomousLogin={this.handleAnynomousLogin}/>
 				}
 				
 			</div>
