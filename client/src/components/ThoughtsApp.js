@@ -12,7 +12,7 @@ import Login from './login';
 export default class ThoughtsApp extends React.Component {
 	state = {
     thoughts: null,
-    session: false,
+    session: null,
     user: ["userName": null, "x-auth": null],
     indexOpen: true,
     profileOpen: false
@@ -33,12 +33,14 @@ export default class ThoughtsApp extends React.Component {
 
   handleAnynomousLogin = () => {
    	let credentials = {email: "test35464@example.com", password: "123456"};
-   	if (login(credentials)) {
-   		this.setState(() => ({
-      	session:true
-    }));
-   	}
-   	
+   	login(credentials)
+   	.then((loginSucceed) => {
+   		if (loginSucceed) {
+	   		this.setState(() => ({
+	      	session:true
+	    	}));
+   		}
+   	});
   };
 
   componentDidMount() {
@@ -46,14 +48,10 @@ export default class ThoughtsApp extends React.Component {
   };
 
   handleToggleProfile = () => {
-    console.log("profile",this.state.profileOpen,"index",this.state.indexOpen);
-
   	this.setState(() => ({
       profileOpen: !this.state.profileOpen,
       indexOpen: !this.state.indexOpen
     }));
-    console.log("profile",this.state.profileOpen,"index",this.state.indexOpen);
-
   };
 
 	render() {
@@ -62,7 +60,7 @@ export default class ThoughtsApp extends React.Component {
 				<Header 
 					title="Thoughts" 
 					handleToggleProfile={this.handleToggleProfile}
-					showButtons={this.state.loggedIn}
+					showButtons={this.state.session}
 				/>
 				{this.state.profileOpen &&
 					<Profile 
