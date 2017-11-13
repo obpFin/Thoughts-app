@@ -16,13 +16,13 @@ const login = (credentials,loginSucceed) => {
     if (response.data.token) {
     	user = {
         loggedIn: true,
-        userName: response.data.userName,
-        jwt: response.data.jwt
+        userName: response.data.user.userName,
+        jwt: response.data.token
   		};
   		sessionStorage.setItem('user', user);
   		console.log("got user ",sessionStorage.getItem('user'));
   		loginSucceed = true;
-  		return true;
+  		return user;
     }
   })
   .catch(function (error) {

@@ -13,7 +13,7 @@ export default class ThoughtsApp extends React.Component {
 	state = {
     thoughts: null,
     session: null,
-    user: ["userName": null, "x-auth": null],
+    user: ["userName": null, "jwt": null],
     indexOpen: true,
     profileOpen: false
   };
@@ -37,12 +37,14 @@ export default class ThoughtsApp extends React.Component {
   	const password = event.target.password.value;
    	let credentials = {email, password};
    	login(credentials)
-  	.then((loginSucceed) => {
-   		if (loginSucceed) {
+  	.then((user) => {
+  		console.log("user ", user);
+   		if (user) {
 	   		this.setState(() => ({
+	   			user: {"userName": user.userName, "jwt": user.jwt},
 	      	session:true
 	    	}));
-	    	console.log("login succeed");
+	    	console.log("login succeed", this.state.user);
    		}
    	});
   };
@@ -78,6 +80,7 @@ export default class ThoughtsApp extends React.Component {
 					title="Thoughts" 
 					handleToggleProfile={this.handleToggleProfile}
 					showButtons={this.state.session}
+					userName={this.state.user.userName}
 				/>
 				{this.state.profileOpen &&
 					<Profile 
