@@ -31,6 +31,22 @@ export default class ThoughtsApp extends React.Component {
 	    });
   };
 
+  handleLoginSubmit = (event) => {
+    event.preventDefault();
+    const email = event.target.username.value;
+  	const password = event.target.password.value;
+   	let credentials = {email, password};
+   	login(credentials)
+  	.then((loginSucceed) => {
+   		if (loginSucceed) {
+	   		this.setState(() => ({
+	      	session:true
+	    	}));
+	    	console.log("login succeed");
+   		}
+   	});
+  };
+
   handleAnynomousLogin = () => {
    	let credentials = {email: "test35464@example.com", password: "123456"};
    	login(credentials)
@@ -39,6 +55,7 @@ export default class ThoughtsApp extends React.Component {
 	   		this.setState(() => ({
 	      	session:true
 	    	}));
+	    	console.log("login succeed");
    		}
    	});
   };
@@ -70,7 +87,7 @@ export default class ThoughtsApp extends React.Component {
 				{this.state.session ? 
 					<ThoughtContainer thoughts={this.state.thoughts}/>
 					:
-					<Login handleAnynomousLogin={this.handleAnynomousLogin}/>
+					<Login handleLoginSubmit={this.handleLoginSubmit} handleAnynomousLogin={this.handleAnynomousLogin}/>
 				}
 				
 			</div>

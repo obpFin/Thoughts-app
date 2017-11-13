@@ -4,12 +4,12 @@ const Login = (props) => {
     return (
     	<div className="login-container">
     		<p className="login-title">Log into Thoughts</p>
-    		<form className="login-form">
+    		<form onSubmit={props.handleLoginSubmit} className="login-form">
 				  <div>
-					  <input name="username" type="text" placeholder="Username" />
+					  <input name="username" type="text" placeholder="Username" autoComplete="login username" />
 					</div>
 				  <div>
-					  <input name="password" type="password" placeholder="Password" />
+					  <input name="password" type="password" placeholder="Password" autoComplete="login password" />
 					</div>
 					<div>
 				  	<input id="submit-form" type="submit" value="Log in" />
