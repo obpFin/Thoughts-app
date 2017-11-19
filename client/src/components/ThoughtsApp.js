@@ -10,10 +10,11 @@ import Profile from './Profile';
 import Login from './login';
 
 export default class ThoughtsApp extends React.Component {
+	//TODO: handle jwt elsewhere
 	state = {
     thoughts: null,
     session: null,
-    user: ["userName": null, "jwt": null],
+    userName: null,
     indexOpen: true,
     profileOpen: false
   };
@@ -37,14 +38,14 @@ export default class ThoughtsApp extends React.Component {
   	const password = event.target.password.value;
    	let credentials = {email, password};
    	login(credentials)
-  	.then((user) => {
-  		console.log("user ", user);
-   		if (user) {
+  	.then((userName) => {
+   		if (userName) {
 	   		this.setState(() => ({
-	   			user: {"userName": user.userName, "jwt": user.jwt},
+	   			userName,
 	      	session:true
 	    	}));
-	    	console.log("login succeed", this.state.user);
+	    	console.log("login succeed",sessionStorage.getItem('user'));
+
    		}
    	});
   };
@@ -80,7 +81,7 @@ export default class ThoughtsApp extends React.Component {
 					title="Thoughts" 
 					handleToggleProfile={this.handleToggleProfile}
 					showButtons={this.state.session}
-					userName={this.state.user.userName}
+					userName={this.state.userName}
 				/>
 				{this.state.profileOpen &&
 					<Profile 
