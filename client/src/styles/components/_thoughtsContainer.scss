@@ -6,6 +6,10 @@
 	position: relative;
 	border-bottom: 6px solid;
 	border-color: $main-color;
+
+	.username {
+		position: absolute;
+	}
 }
 
 @media (max-width: 414px) {

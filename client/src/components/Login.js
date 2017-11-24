@@ -17,7 +17,7 @@ const Login = (props) => {
 				</form>
 				<a href="#" onClick={() => props.handleAnynomousLogin()}>I just want to take a look around</a>
 			</div>
-				    );
+		);
   };
 
 export default Login;

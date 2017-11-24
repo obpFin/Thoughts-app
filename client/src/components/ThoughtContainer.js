@@ -11,6 +11,7 @@ export default class ThoughtContainer extends React.Component {
   render () {
   	return (
       <div className="thoughts-container">
+        <p className="username">Hello {this.props.userName}!</p>
         {this.props.thoughts &&
     			this.props.thoughts &&
     			this.mapThoughts(this.props)

@@ -45,7 +45,6 @@ export default class ThoughtsApp extends React.Component {
 	      	session:true
 	    	}));
 	    	console.log("login succeed",sessionStorage.getItem('user'));
-
    		}
    	});
   };
@@ -89,7 +88,7 @@ export default class ThoughtsApp extends React.Component {
 					/>
 				}
 				{this.state.session ? 
-					<ThoughtContainer thoughts={this.state.thoughts}/>
+					<ThoughtContainer thoughts={this.state.thoughts} userName={this.state.userName ? this.state.userName : "Stranger"}/>
 					:
 					<Login handleLoginSubmit={this.handleLoginSubmit} handleAnynomousLogin={this.handleAnynomousLogin}/>
 				}
