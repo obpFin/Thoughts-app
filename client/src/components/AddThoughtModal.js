@@ -9,10 +9,16 @@ export default class AddThoughtModal extends React.Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		let inputValue = this.textInput.value
+		let token = JSON.parse(sessionStorage.getItem("user")).jwt;
+		console.log("token", token);
 		if (inputValue) {
 			console.log();
-			axios.post(`${apiUrl}/thoughts`, {
-				text:inputValue
+
+			axios({ 
+				method: 'POST', 
+				url: `${apiUrl}/thoughts`, 
+				headers: {"x-auth": token}, 
+				data: { text:inputValue } 
 			})
 	    .then(function (response) {
 	    	console.log(response);
