@@ -12,6 +12,7 @@ const HeaderMenu = (props) => {
 							<AddThoughtModal 
 								isOpen = {props.addThoughtOpen} 
 								handleToggleThought = {props.handleToggleThought}
+								getThoughts = {props.getThoughts}
 							/>
 						</div>
 					}

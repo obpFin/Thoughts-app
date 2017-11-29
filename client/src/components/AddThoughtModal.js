@@ -7,21 +7,20 @@ import { apiUrl } from './../utils/utils';
 export default class AddThoughtModal extends React.Component {
 
 	handleSubmit = (event) => {
+		let self = this;
 		event.preventDefault();
 		let inputValue = this.textInput.value
 		let token = JSON.parse(sessionStorage.getItem("user")).jwt;
-		console.log("token", token);
 		if (inputValue) {
-			console.log();
-
 			axios({ 
 				method: 'POST', 
 				url: `${apiUrl}/thoughts`, 
 				headers: {"x-auth": token}, 
 				data: { text:inputValue } 
 			})
-	    .then(function (response) {
-	    	console.log(response);
+	    .then(function(response) {
+				self.props.getThoughts();
+				self.props.handleToggleThought();
 	    })
 	    .catch(function (error) {
 	      console.log(error);

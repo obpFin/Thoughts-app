@@ -42,6 +42,7 @@ export default class Header extends React.Component {
 	      		<HeaderMenu 
               handleToggleThought={this.handleToggleThought}
               handleToggleProfile={this.props.handleToggleProfile}
+              getThoughts={this.props.getThoughts}
               addThoughtOpen={this.state.addThoughtOpen}
               showButtons={this.props.showButtons}
             />

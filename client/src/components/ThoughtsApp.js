@@ -10,7 +10,6 @@ import Profile from './Profile';
 import Login from './login';
 
 export default class ThoughtsApp extends React.Component {
-	//TODO: handle jwt elsewhere
 	state = {
     thoughts: null,
     session: null,
@@ -79,6 +78,7 @@ export default class ThoughtsApp extends React.Component {
 				<Header 
 					title="Thoughts" 
 					handleToggleProfile={this.handleToggleProfile}
+					getThoughts={this.getThoughts}
 					showButtons={this.state.session}
 					userName={this.state.userName}
 				/>
