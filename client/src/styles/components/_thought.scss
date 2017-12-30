@@ -1,18 +1,16 @@
 .creator {
 	font-family: $main-font;
-	color: #70bdf2;
+	color: white;
 }
 
 .thought-container {
 	font-family: $user-font;
 	font-size: 1.7em;
 	display: inline-block;
-	background-color: #edf4fe;
+	background-color: $main-color;
+	color: white;
 	position: relative;
 	padding: 2em;
 	margin: 2em;
-	border-style: solid;
-	border-color: #70bdf2;
-	border-radius: 40%;
-	border-style: dotted;
+
 }

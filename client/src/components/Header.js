@@ -13,7 +13,7 @@ export default class Header extends React.Component {
 
   handleTitleClick = () => {
     //todo: location == development || production
-    window.location.href = `http://localhost:8081`;
+    window.location.href = 'http://localhost:8080';
   };
 
   handleToggleThought = () => {
@@ -28,6 +28,7 @@ export default class Header extends React.Component {
   };
 
   render() {
+    console.log(this.props.userName)
     return (
     	<div id="header-container">
     	<table>
@@ -39,12 +40,16 @@ export default class Header extends React.Component {
 	      		<td>
 	        		<i className="material-icons md-24">chat_bubble</i>
 	      		</td>
+            <td className="welcome-text">
+              {this.props.userName && <i>Hello {this.props.userName}!</i>}
+            </td>
 	      		<HeaderMenu 
               handleToggleThought={this.handleToggleThought}
               handleToggleProfile={this.props.handleToggleProfile}
               getThoughts={this.props.getThoughts}
               addThoughtOpen={this.state.addThoughtOpen}
               showButtons={this.props.showButtons}
+              userName={this.props.userName}
             />
       		</tr>
     		</tbody>

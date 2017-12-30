@@ -4,7 +4,7 @@ const Thought = (props) => {
   return (
     <div className="thought-container">
       <p>{props.thought.text}</p>
-      <p className=""><span className="creator">By: </span>{props.thought._creatorName}</p>
+      <p className="creator">By: {props.thought._creatorName}</p>
     </div>
   );
 };
