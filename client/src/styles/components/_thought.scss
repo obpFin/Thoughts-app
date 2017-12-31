@@ -4,13 +4,20 @@
 }
 
 .thought-container {
+	display: flex;
+	align-items: center;
 	font-family: $user-font;
 	font-size: 1.7em;
-	display: inline-block;
+	margin: 40px 20px;
 	background-color: $main-color;
 	color: white;
 	position: relative;
-	padding: 2em;
-	margin: 2em;
+	//padding: 2em;
+	//margin: 2em;
 
+}
+
+.text-container {
+	padding: 10px;
+	margin: 0 auto;
 }
