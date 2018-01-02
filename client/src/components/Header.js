@@ -23,12 +23,17 @@ export default class Header extends React.Component {
   };
 
   handleToggleProfile = () => {
-    console.log("Header.js toggle");
     this.props.handleToggleProfile;
   };
 
+  handleToggleSettings = () => {
+    console.log("settings toggle");
+    this.setState(() => ({
+      settingsOpen: !this.state.settingsOpen
+    }));
+  };
+
   render() {
-    console.log(this.props.userName)
     return (
     	<div id="header-container">
     	<table>
@@ -46,8 +51,10 @@ export default class Header extends React.Component {
 	      		<HeaderMenu 
               handleToggleThought={this.handleToggleThought}
               handleToggleProfile={this.props.handleToggleProfile}
+              handleToggleSettings={this.handleToggleSettings}
               getThoughts={this.props.getThoughts}
               addThoughtOpen={this.state.addThoughtOpen}
+              settingsOpen={this.state.settingsOpen}
               showButtons={this.props.showButtons}
               userName={this.props.userName}
             />
@@ -60,7 +67,7 @@ export default class Header extends React.Component {
 }
 
 Header.defaultProps = {
-title: 'Thoughts'
+  title: 'Thoughts'
 };
 
 
