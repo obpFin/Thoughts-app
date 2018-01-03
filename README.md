@@ -20,4 +20,5 @@
 - ES7 class properties
 #### Styling
 - SCSS
+- CSS Grid
 - Normalize.css
