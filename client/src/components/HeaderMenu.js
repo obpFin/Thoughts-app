@@ -19,6 +19,8 @@ const HeaderMenu = (props) => {
 					}
 					<DropDown 
 						menuActive={props.settingsOpen}
+						handleLogOut={props.handleLogOut}
+						handleToggleSettings={props.handleToggleSettings}
 					/>
 				</td>
     );

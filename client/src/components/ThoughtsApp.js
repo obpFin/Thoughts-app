@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { apiUrl } from './../utils/utils';
-import { login } from './../utils/api/api';
+import { login, logOut } from './../utils/api/api';
 import Header from './Header';
 import ThoughtContainer from './ThoughtContainer';
 import Thought from './Thought';
@@ -41,11 +41,24 @@ export default class ThoughtsApp extends React.Component {
    		if (userName) {
 	   		this.setState(() => ({
 	   			userName,
-	      	session:true
+	      	session: true
 	    	}));
 	    	console.log("login succeed",sessionStorage.getItem('user'));
    		}
    	});
+  };
+
+  handleLogOut = (event) => {
+    event.preventDefault();
+  	logOut()
+  	.then((response) => {
+  		if (response) {
+  			this.setState(() => ({
+  				userName: null,
+		    	session: null
+  			}));
+  		}
+  	});
   };
 
   handleAnynomousLogin = () => {
@@ -74,12 +87,12 @@ export default class ThoughtsApp extends React.Component {
   };
 
 	render() {
-		console.log(this.state.userName)
 		return (
 			<div className="main-wrapper">
 				<Header 
 					title="Thoughts" 
 					handleToggleProfile={this.handleToggleProfile}
+					handleLogOut={this.handleLogOut}
 					getThoughts={this.getThoughts}
 					showButtons={this.state.session}
 					userName={this.state.userName}

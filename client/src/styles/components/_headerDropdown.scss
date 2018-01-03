@@ -1,10 +1,11 @@
 .settingsMenu {
   position: absolute;
+  right: 0px;
 }
 
 .menu-enter {
   max-height: 0px;
-  -webkit-transition: max-height 1s ease;
+  transition: max-height .5s ease;
   overflow: hidden;
 }
 
@@ -15,7 +16,7 @@
 
 .menu-leave {
   max-height: 100px;
-  -webkit-transition: max-height 1s ease;
+  transition: max-height .5s ease;
 }
 
 .menu-leave.menu-leave-active {
@@ -24,6 +25,18 @@
 }
 
 ul {
-  border: #ababab solid 1px;
   width: 70%;
+  background-color: #a3bed7;
+  list-style-type: none;
+  z-index: 9999;
+  padding: 5px 20px;
+
+  li {
+    margin: 10px 0;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
 }

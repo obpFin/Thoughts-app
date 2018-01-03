@@ -52,6 +52,7 @@ export default class Header extends React.Component {
               handleToggleThought={this.handleToggleThought}
               handleToggleProfile={this.props.handleToggleProfile}
               handleToggleSettings={this.handleToggleSettings}
+              handleLogOut={this.props.handleLogOut}
               getThoughts={this.props.getThoughts}
               addThoughtOpen={this.state.addThoughtOpen}
               settingsOpen={this.state.settingsOpen}

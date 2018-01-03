@@ -3,29 +3,30 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class DropDown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.state = {
-      menuActive: true
-    };
-  }
+
+  state = {
+    menuActive: false
+  };
 
   toggleMenu() {
-    let menuState = !this.props.menuActive;
+    let menuActive = !this.props.menuActive;
     this.setState({
-      menuActive: menuState
+      menuActive
     });
   }
+
+  handleClickLogOut = (e) => {
+    this.props.handleToggleSettings();
+    this.props.handleLogOut(e);
+  };
 
   render() {
     let menu;
     if(this.props.menuActive) {
       menu = <div>
                 <ul>
-                  <li>First Item </li>
-                  <li>Second Item </li>
-                  <li>Third Item </li>
+                  <li><a href="#">Settings</a></li>
+                  <li><a onClick={this.handleClickLogOut} href="#">Log out</a></li>
                 </ul>
               </div>
     } else {
