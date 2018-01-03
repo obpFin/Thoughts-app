@@ -1,6 +1,6 @@
-# Thoughts-app
-*a fully responsive web-app to share your thoughts!*
-## Server
+*a fully responsive SPA to share your thoughts!*
+
+# Server
 
 - Express.js
 - Mongodb w/ Mongoose.js
@@ -14,7 +14,7 @@
 - Chai
 
 
-## Client
+# Client
 
 - React.js
 - ES7 class properties
