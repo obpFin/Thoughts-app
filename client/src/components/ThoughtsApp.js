@@ -75,8 +75,8 @@ export default class ThoughtsApp extends React.Component {
    	});
   };
 
-  componentDidMount() {
-    this.getThoughts();
+  createAccount = () => {
+
   };
 
   handleToggleProfile = () => {
@@ -84,6 +84,10 @@ export default class ThoughtsApp extends React.Component {
       profileOpen: !this.state.profileOpen,
       indexOpen: !this.state.indexOpen
     }));
+  };
+
+  componentDidMount() {
+    this.getThoughts();
   };
 
 	render() {
@@ -105,7 +109,11 @@ export default class ThoughtsApp extends React.Component {
 				{this.state.session ? 
 					<ThoughtContainer thoughts={this.state.thoughts} userName={this.state.userName ? this.state.userName : "Stranger"}/>
 					:
-					<Login handleLoginSubmit={this.handleLoginSubmit} handleAnynomousLogin={this.handleAnynomousLogin}/>
+					<Login 
+						handleLoginSubmit={this.handleLoginSubmit} 
+						handleAnynomousLogin={this.handleAnynomousLogin}
+						createAccount={this.createAccount}
+					/>
 				}
 				
 			</div>
