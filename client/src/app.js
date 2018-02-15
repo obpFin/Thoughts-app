@@ -6,3 +6,6 @@ import 'normalize.css/normalize.css'
 import css from './styles/app.scss';
 
 ReactDOM.render(<ThoughtsApp />, document.getElementById('app'));
+
+
+
