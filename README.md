@@ -17,6 +17,8 @@
 # Client
 
 - React.js
+- Redux
+- Webpack
 - ES7 class properties
 #### Styling
 - SCSS
