@@ -1,4 +1,4 @@
-export const createThought = (
+export const addThought = (
 	{
 		text = ''
 	} = {}
