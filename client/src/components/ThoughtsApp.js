@@ -115,7 +115,6 @@ export default class ThoughtsApp extends React.Component {
 						createAccount={this.createAccount}
 					/>
 				}
-				
 			</div>
 		);
 	}

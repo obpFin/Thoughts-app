@@ -2,6 +2,7 @@ import React from 'react';
 
 import HeaderMenu from './HeaderMenu'
 import { apiUrl } from './../utils/utils';
+import DropDown from './HeaderDropdown'
 
 export default class Header extends React.Component {
 
@@ -27,15 +28,17 @@ export default class Header extends React.Component {
   };
 
   handleToggleSettings = () => {
-    console.log("settings toggle");
+    console.log("toggle");
     this.setState(() => ({
       settingsOpen: !this.state.settingsOpen
     }));
   };
 
   render() {
+    console.log(this.state.settingsOpen);
     return (
     	<div id="header-container">
+      {this.state.settingsOpen && <div className="settings-backdrop" onClick={this.handleToggleSettings}></div>}
     	<table>
     		<tbody>
       		<tr className="header">
@@ -62,6 +65,11 @@ export default class Header extends React.Component {
       		</tr>
     		</tbody>
     	</table>
+      <DropDown 
+        menuActive={this.state.settingsOpen}
+        handleLogOut={this.props.handleLogOut}
+        handleToggleSettings={this.handleToggleSettings}
+      />
     	</div>
     );
   }

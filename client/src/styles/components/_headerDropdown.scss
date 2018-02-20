@@ -1,6 +1,25 @@
 .settingsMenu {
   position: absolute;
+  z-index: 9999;
   right: 0px;
+  top: 50px;
+  color: white;
+  span > .menuitems {
+    width: 70%;
+    background-color: #a3bed7;
+    list-style-type: none;
+    z-index: 9999;
+    padding: 5px 20px;
+
+    li {
+      margin: 10px 0;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
 }
 
 .menu-enter {
@@ -24,19 +43,5 @@
   max-height: 0px;
 }
 
-ul {
-  width: 70%;
-  background-color: #a3bed7;
-  list-style-type: none;
-  z-index: 9999;
-  padding: 5px 20px;
 
-  li {
-    margin: 10px 0;
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-  }
-}

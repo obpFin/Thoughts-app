@@ -3,7 +3,7 @@ export const addThought = (
 		text = ''
 	} = {}
 ) => ({
-	type: 'CREATE_THOUGHT',
+	type: 'ADD_THOUGHT',
 	thought: {
 		text
 	}

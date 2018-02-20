@@ -8,12 +8,13 @@ class DropDown extends React.Component {
     menuActive: false
   };
 
-  toggleMenu() {
+  toggleMenu = () => {
+    console.log("toggleMenu");
     let menuActive = !this.props.menuActive;
     this.setState({
       menuActive
     });
-  }
+  };
 
   handleClickLogOut = (e) => {
     this.props.handleToggleSettings();
@@ -23,21 +24,21 @@ class DropDown extends React.Component {
   render() {
     let menu;
     if(this.props.menuActive) {
-      menu = <div>
-                <ul>
-                  <li><a href="#">Settings</a></li>
-                  <li><a onClick={this.handleClickLogOut} href="#">Log out</a></li>
-                </ul>
-              </div>
+      menu = <ul className="menuitems">
+                <li><a href="#">Settings</a></li>
+                <li><a onClick={this.handleClickLogOut} href="#">Log out</a></li>
+              </ul>
+                
+              
     } else {
       menu = "";
     }
     return (
-      <div className="settingsMenu">
-      <ReactCSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
-        {menu}
-      </ReactCSSTransitionGroup>
-    </div>
+        <div className="settingsMenu">
+          <ReactCSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
+            {menu}
+          </ReactCSSTransitionGroup>
+        </div>
     )
   }
 }

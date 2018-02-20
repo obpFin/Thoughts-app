@@ -15,12 +15,13 @@ store.dispatch(addThought({ text: 'test thought' }));
 
 const state = store.getState();
 const visibleThoughts = getVisibleThoughts(state.thoughts, state.filters);
+console.log("visibleThoughts",visibleThoughts);
 
 const jsx = (
   <Provider store={store}>
     <ThoughtsApp />
   </Provider>
-)
+);
 
 
 ReactDOM.render(jsx, document.getElementById('app'));
