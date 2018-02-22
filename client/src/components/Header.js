@@ -35,7 +35,6 @@ export default class Header extends React.Component {
   };
 
   render() {
-    console.log(this.state.settingsOpen);
     return (
     	<div id="header-container">
       {this.state.settingsOpen && <div className="settings-backdrop" onClick={this.handleToggleSettings}></div>}

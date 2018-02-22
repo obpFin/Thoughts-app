@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { apiUrl } from './../utils/utils';
-import { login, logOut } from './../utils/api/api';
+import { login, logOut, allThoughts, profileThoughts } from './../utils/api/api';
 import Header from './Header';
 import ThoughtContainer from './ThoughtContainer';
 import Thought from './Thought';
@@ -19,16 +19,12 @@ export default class ThoughtsApp extends React.Component {
   };
 
   getThoughts = () => {
-   	var self = this;
-    axios.get(`${apiUrl}/thoughts/all`)
-	    .then(function (response) {
-	    	self.setState(() => ({
-	        thoughts: response.data.thoughts
-    		}));
-	    })
-	    .catch(function (error) {
-	      console.log(error);
-	    });
+   	allThoughts()
+    .then((thoughts) => {
+      this.setState({
+        thoughts
+      });
+    });
   };
 
   handleLoginSubmit = (event) => {
@@ -70,13 +66,9 @@ export default class ThoughtsApp extends React.Component {
 	   			userName,
 	      	session:true
 	    	}));
-	    	console.log("login succeed",sessionStorage.getItem('user'));
+	    	console.log("login succeeded",sessionStorage.getItem('user'));
    		}
    	});
-  };
-
-  createAccount = () => {
-
   };
 
   handleToggleProfile = () => {

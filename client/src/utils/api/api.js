@@ -5,7 +5,6 @@ import { apiUrl } from './../utils';
 
 const token = () => {
   const user = sessionStorage.getItem('user')
-  console.log("user",user);
   if (user) {
     return JSON.parse(user).jwt;
   }
@@ -35,8 +34,6 @@ const login = (credentials,loginSucceed) => {
 }
 
 const logOut = () => {
-      console.log("asd",token());
-
   if (sessionStorage.getItem('user')) {
     //sessionStorage.removeItem('user');
     let jwt = token()
@@ -55,4 +52,37 @@ const logOut = () => {
   }
 }
 
-export { login, logOut };
+const allThoughts = () => {
+  return new Promise((resolve, reject) => {
+    axios.get(`${apiUrl}/thoughts/all`)
+    .then(function (response) {
+      resolve(response.data.thoughts);
+    })
+    .catch(function (error) {
+      console.log("response",error);
+      reject(error);
+    });
+  });
+};
+
+const profileThoughts = () => {
+  var self = this;
+  let jwt = token()
+  console.log(jwt);
+  axios.get(`${apiUrl}/users/me`, {
+    headers: {
+      'x-auth': jwt 
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+    // self.setState({
+    //   thoughts: response.data.thoughts
+    // });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+};
+
+export { login, logOut, allThoughts, profileThoughts };
