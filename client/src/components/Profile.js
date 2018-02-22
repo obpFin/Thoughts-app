@@ -5,34 +5,32 @@ import { apiUrl } from './../utils/utils';
 import ProfileInfo from './ProfileInfo';
 import ThoughtContainer from './ThoughtContainer';
 
+import { userInfo } from '../utils/api/api';
+
 export default class Profile extends React.Component {
 
 	state = {
-		ProfileThoughts: null
+		ProfileThoughts: null,
+    userInfo: {}
 	};
 
-  getProfileThoughts = () => {
-   	var self = this;
-    axios.get(`${apiUrl}/users/me`)
-      .then(function (response) {
-      	console.log(response);
-        // self.setState({
-        //   thoughts: response.data.thoughts
-        // });
-      })
-      .catch(function (error) {
-        console.log(error);
+  getUserInfo = () => {
+   	userInfo()
+    .then((user) => {
+      this.setState({
+        userInfo: {...user}
       });
+    });
   };
 
   componentDidMount() {
-    this.getProfileThoughts();
+    this.getUserInfo();
   };
 
 	render() {
 		return (
 			<div>
-				<ProfileInfo thoughtsCount={this.props.thoughts.length}/>
+				<ProfileInfo user={this.state.userInfo}/>
 				<ThoughtContainer thoughts={this.state.ProfileThoughts}/>
 			</div>
 		);

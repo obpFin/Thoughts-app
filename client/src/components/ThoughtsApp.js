@@ -94,9 +94,7 @@ export default class ThoughtsApp extends React.Component {
 					userName={this.state.userName}
 				/>
 				{this.state.profileOpen &&
-					<Profile 
-						thoughts={this.state.thoughts}
-					/>
+					<Profile/>
 				}
 				{this.state.session ? 
 					<ThoughtContainer thoughts={this.state.thoughts} userName={this.state.userName ? this.state.userName : "Stranger"}/>

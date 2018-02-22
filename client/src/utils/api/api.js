@@ -27,7 +27,7 @@ const login = (credentials,loginSucceed) => {
   		return response.data.user.userName;
     }
   })
-  .catch(function (error) {
+  .catch((error) => {
   	return Promise.reject();
     console.log(error);
   });
@@ -42,10 +42,10 @@ const logOut = () => {
         'x-auth': jwt 
       }
     })
-    .then(function (response) {
+    .then((response) => {
       return token();
     })
-    .catch(function (error) {
+    .catch((error) => {
       return Promise.reject();
       console.log(error);
     });
@@ -55,7 +55,7 @@ const logOut = () => {
 const allThoughts = () => {
   return new Promise((resolve, reject) => {
     axios.get(`${apiUrl}/thoughts/all`)
-    .then(function (response) {
+    .then((response) => {
       resolve(response.data.thoughts);
     })
     .catch(function (error) {
@@ -65,24 +65,21 @@ const allThoughts = () => {
   });
 };
 
-const profileThoughts = () => {
-  var self = this;
-  let jwt = token()
-  console.log(jwt);
-  axios.get(`${apiUrl}/users/me`, {
-    headers: {
-      'x-auth': jwt 
-    }
-  })
-  .then(function (response) {
-    console.log(response);
-    // self.setState({
-    //   thoughts: response.data.thoughts
-    // });
-  })
-  .catch(function (error) {
-    console.log(error);
+const userInfo = () => {
+  let jwt = token();
+  return new Promise((resolve, reject) => {
+    axios.get(`${apiUrl}/users/me`, {
+      headers: {
+        'x-auth': jwt 
+      }
+    })
+    .then((response) => {
+      resolve(response.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
   });
 };
 
-export { login, logOut, allThoughts, profileThoughts };
+export { login, logOut, allThoughts, userInfo };

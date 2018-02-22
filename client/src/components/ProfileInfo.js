@@ -5,10 +5,11 @@ export default class ProfileInfo extends React.Component {
 
 	}
 	render() {
-		console.log(this.props.thoughtsCount);
+		const { userName, email } = this.props.user;
 		return (
 			<div className = "profile-info-container">
-				<p>Nr. of thoughts: {this.props.thoughtsCount}</p>
+				<p>{userName}</p>
+				<p>{email}</p>
 			</div>
 		);
 	}
