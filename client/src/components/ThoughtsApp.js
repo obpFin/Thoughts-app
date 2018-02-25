@@ -10,12 +10,27 @@ import Profile from './Profile';
 import Login from './login';
 
 export default class ThoughtsApp extends React.Component {
+
 	state = {
     thoughts: null,
     session: null,
     userName: null,
     indexOpen: true,
     profileOpen: false
+  };
+
+  showThoughts = () => {
+    console.log("User", user);
+    let user = window.sessionStorage.getItem('user');
+    if (user) {
+      this.setState({
+        session: true,
+        userName:user.user
+      });
+      return true;
+    }
+    this.props.history.push('/login');
+    return null;
   };
 
   getThoughts = () => {
@@ -25,23 +40,6 @@ export default class ThoughtsApp extends React.Component {
         thoughts
       });
     });
-  };
-
-  handleLoginSubmit = (event) => {
-    event.preventDefault();
-    const email = event.target.username.value;
-  	const password = event.target.password.value;
-   	let credentials = {email, password};
-   	login(credentials)
-  	.then((userName) => {
-   		if (userName) {
-	   		this.setState(() => ({
-	   			userName,
-	      	session: true
-	    	}));
-	    	console.log("login succeed",sessionStorage.getItem('user'));
-   		}
-   	});
   };
 
   handleLogOut = (event) => {
@@ -57,19 +55,7 @@ export default class ThoughtsApp extends React.Component {
   	});
   };
 
-  handleAnynomousLogin = () => {
-   	let credentials = {email: "test35464@example.com", password: "123456"};
-   	login(credentials)
-   	.then((userName) => {
-   		if (userName) {
-	   		this.setState(() => ({
-	   			userName,
-	      	session:true
-	    	}));
-	    	console.log("login succeeded",sessionStorage.getItem('user'));
-   		}
-   	});
-  };
+
 
   handleToggleProfile = () => {
   	this.setState(() => ({
@@ -79,10 +65,12 @@ export default class ThoughtsApp extends React.Component {
   };
 
   componentDidMount() {
-    this.getThoughts();
+    console.log(this.getThoughts());
+    this.showThoughts();
   };
 
 	render() {
+    console.log("Session",this.state.session);
 		return (
 			<div className="main-wrapper">
 				<Header 
@@ -96,15 +84,12 @@ export default class ThoughtsApp extends React.Component {
 				{this.state.profileOpen &&
 					<Profile/>
 				}
-				{this.state.session ? 
-					<ThoughtContainer thoughts={this.state.thoughts} userName={this.state.userName ? this.state.userName : "Stranger"}/>
-					:
-					<Login 
-						handleLoginSubmit={this.handleLoginSubmit} 
-						handleAnynomousLogin={this.handleAnynomousLogin}
-						createAccount={this.createAccount}
-					/>
-				}
+				{ this.state.session ?
+          <ThoughtContainer 
+          thoughts={this.state.thoughts} 
+          userName={this.state.userName ? this.state.userName : "Stranger"}
+        /> 
+        : null }
 			</div>
 		);
 	}

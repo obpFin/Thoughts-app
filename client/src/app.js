@@ -19,7 +19,7 @@ console.log("visibleThoughts",visibleThoughts);
 
 const jsx = (
   <Provider store={store}>
-    <ThoughtsApp />
+    <AppRouter />
   </Provider>
 );
 

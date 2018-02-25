@@ -1,10 +1,48 @@
 import React from 'react';
 
-const Login = (props) => {
-    return (
+import { login } from './../utils/api/api';
+import {withRouter} from "react-router-dom";
+
+class Login extends React.Component {
+  createAccount() {
+
+  }
+
+  handleLoginSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.username.value;
+    const password = e.target.password.value;
+    let credentials = {email, password};
+    login(credentials)
+    .then((userName) => {
+      if (userName) {
+        this.setState(() => ({
+          userName,
+          session: true
+        }));
+        this.console.log(props.history);
+        this.props.history.push('/');
+        console.log("login succeed",sessionStorage.getItem('user'));
+      }
+    });
+  };
+
+  handleAnynomousLogin = () => {
+    let credentials = {email: "test35464@example.com", password: "123456"};
+    login(credentials)
+    .then((user) => {
+      if (window.sessionStorage.getItem('user')) {
+        console.log("login succeeded",sessionStorage.getItem('user'));
+        this.props.history.push('/');
+      }
+    });
+  };
+
+	render() {
+		    return (
     	<div className="login-container">
     		<p className="login-title">Log into Thoughts</p>
-    		<form onSubmit={props.handleLoginSubmit} className="login-form">
+    		<form onSubmit={this.handleLoginSubmit} className="login-form">
 				  <div>
 					  <input name="username" type="text" placeholder="Username" autoComplete="login username" />
 					</div>
@@ -15,11 +53,11 @@ const Login = (props) => {
 				  	<input id="submit-form" type="submit" value="Log in" />
 				  </div>
 				</form>
-				<a href="#" onClick={() => props.createAccount()}>Create Account</a>
-				<a href="#" onClick={() => props.handleAnynomousLogin()}>I just want to take a look around</a>
-				
+				<a href="#" onClick={() => this.createAccount()}>Create Account</a>
+				<a href="#" onClick={() => this.handleAnynomousLogin()}>I just want to take a look around</a>
 			</div>
 		);
-  };
+	}
+}
 
-export default Login;
+export default withRouter(Login);

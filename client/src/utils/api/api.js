@@ -13,23 +13,25 @@ const token = () => {
 
 const login = (credentials,loginSucceed) => {
 	var self = this;
-	return axios.post(`${apiUrl}/users/login`, {
-		email: credentials.email,
-		password: credentials.password
-	})
-  .then(function (response) {
-    if (response.data.token) {
-    	sessionStorage.setItem('user', JSON.stringify({
-        loggedIn: true,
-        userName: response.data.user.userName,
-        jwt: response.data.token
-			}));
-  		return response.data.user.userName;
-    }
-  })
-  .catch((error) => {
-  	return Promise.reject();
-    console.log(error);
+  return new Promise((resolve, reject) => {
+    axios.post(`${apiUrl}/users/login`, {
+      email: credentials.email,
+      password: credentials.password
+    })
+    .then(function (response) {
+      if (response.data.token) {
+        sessionStorage.setItem('user', JSON.stringify({
+          loggedIn: true,
+          userName: response.data.user.userName,
+          jwt: response.data.token
+        }));
+        resolve(response.data.user);
+      }
+    })
+    .catch((error) => {
+      reject(error);
+      console.log(error);
+    });
   });
 }
 

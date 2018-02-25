@@ -6,4 +6,4 @@ const NotFoundPage = () => {
     );
   };
 
-export default HeaderMenu;
+export default NotFoundPage;
