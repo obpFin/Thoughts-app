@@ -9,6 +9,10 @@ import Thought from './Thought';
 import Profile from './Profile';
 import Login from './login';
 
+window.onbeforeunload = (e) => {
+  window.sessionStorage.removeItem('user');
+};
+
 export default class ThoughtsApp extends React.Component {
 
 	state = {
@@ -20,7 +24,6 @@ export default class ThoughtsApp extends React.Component {
   };
 
   showThoughts = () => {
-    console.log("User", user);
     let user = window.sessionStorage.getItem('user');
     if (user) {
       this.setState({
@@ -51,11 +54,10 @@ export default class ThoughtsApp extends React.Component {
   				userName: null,
 		    	session: null
   			}));
+        this.props.history.push('/login');
   		}
   	});
   };
-
-
 
   handleToggleProfile = () => {
   	this.setState(() => ({
@@ -65,12 +67,10 @@ export default class ThoughtsApp extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.getThoughts());
     this.showThoughts();
   };
 
 	render() {
-    console.log("Session",this.state.session);
 		return (
 			<div className="main-wrapper">
 				<Header 
@@ -84,12 +84,12 @@ export default class ThoughtsApp extends React.Component {
 				{this.state.profileOpen &&
 					<Profile/>
 				}
-				{ this.state.session ?
+				{ this.state.session &&
           <ThoughtContainer 
           thoughts={this.state.thoughts} 
           userName={this.state.userName ? this.state.userName : "Stranger"}
         /> 
-        : null }
+        }
 			</div>
 		);
 	}
