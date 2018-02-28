@@ -30,6 +30,7 @@ export default class ThoughtsApp extends React.Component {
         session: true,
         userName:user.user
       });
+      this.getThoughts();
       return true;
     }
     this.props.history.push('/login');
@@ -45,27 +46,6 @@ export default class ThoughtsApp extends React.Component {
     });
   };
 
-  handleLogOut = (event) => {
-    event.preventDefault();
-  	logOut()
-  	.then((response) => {
-  		if (response) {
-  			this.setState(() => ({
-  				userName: null,
-		    	session: null
-  			}));
-        this.props.history.push('/login');
-  		}
-  	});
-  };
-
-  handleToggleProfile = () => {
-  	this.setState(() => ({
-      profileOpen: !this.state.profileOpen,
-      indexOpen: !this.state.indexOpen
-    }));
-  };
-
   componentDidMount() {
     this.showThoughts();
   };
@@ -73,14 +53,6 @@ export default class ThoughtsApp extends React.Component {
 	render() {
 		return (
 			<div className="main-wrapper">
-				<Header 
-					title="Thoughts" 
-					handleToggleProfile={this.handleToggleProfile}
-					handleLogOut={this.handleLogOut}
-					getThoughts={this.getThoughts}
-					showButtons={this.state.session}
-					userName={this.state.userName}
-				/>
 				{this.state.profileOpen &&
 					<Profile/>
 				}

@@ -5,7 +5,7 @@ import NotFoundPage from '../components/NotFoundPage';
 import ThoughtsApp from '../components/ThoughtsApp';
 import Header from '../components/Header';
 import Login from '../components/Login';
-import CreateAccount from '../components/CreateAccount';
+import Profile from '../components/Profile';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -14,6 +14,7 @@ const AppRouter = () => (
       <Switch>
         <Route exact path="/" component={ThoughtsApp} />
         <Route path="/login" component={Login} />
+        <Route path="/profile" component={Profile} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
