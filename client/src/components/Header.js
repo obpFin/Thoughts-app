@@ -1,10 +1,12 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
+import { logOut, isLoggedIn } from '../utils/api/api';
 
 import HeaderMenu from './HeaderMenu'
 import { apiUrl } from './../utils/utils';
 import DropDown from './HeaderDropdown'
 
-export default class Header extends React.Component {
+class Header extends React.Component {
 
   state = {
     addThoughtOpen: false,
@@ -23,12 +25,25 @@ export default class Header extends React.Component {
     }));
   };
 
+  handleLogOut = (event) => {
+    event.preventDefault();
+    logOut()
+    .then((response) => {
+      if (response) {
+        this.setState(() => ({
+          userName: null,
+          session: null
+        }));
+        this.props.history.push('/login');
+      }
+    });
+  };
+
   handleToggleProfile = () => {
-    this.props.handleToggleProfile;
+    this.props.history.push('/profile');
   };
 
   handleToggleSettings = () => {
-    console.log("toggle");
     this.setState(() => ({
       settingsOpen: !this.state.settingsOpen
     }));
@@ -52,14 +67,12 @@ export default class Header extends React.Component {
             </td>
 	      		<HeaderMenu 
               handleToggleThought={this.handleToggleThought}
-              handleToggleProfile={this.props.handleToggleProfile}
+              handleToggleProfile={this.handleToggleProfile}
               handleToggleSettings={this.handleToggleSettings}
-              handleLogOut={this.props.handleLogOut}
-              getThoughts={this.props.getThoughts}
+              handleLogOut={this.handleLogOut}
               addThoughtOpen={this.state.addThoughtOpen}
               settingsOpen={this.state.settingsOpen}
-              showButtons={this.props.showButtons}
-              userName={this.props.userName}
+              isLoggedIn={() => isLoggedIn()}
             />
       		</tr>
     		</tbody>
@@ -73,6 +86,8 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default withRouter(Header)
 
 Header.defaultProps = {
   title: 'Thoughts'

@@ -84,4 +84,11 @@ const userInfo = () => {
   });
 };
 
-export { login, logOut, allThoughts, userInfo };
+const isLoggedIn = () => {
+  if(token()) {
+    return true;
+  }
+  return false;
+}
+
+export { login, logOut, allThoughts, userInfo, isLoggedIn };

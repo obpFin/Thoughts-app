@@ -5,7 +5,7 @@ import DropDown from './HeaderDropdown'
 const HeaderMenu = (props) => {
     return (
 			<td className="upper-menu">
-				{props.showButtons &&
+				{props.isLoggedIn() &&
 					<div>
 			  		<a onClick={props.handleToggleThought} className="add-thought material-icons md-32">add_circle</a>
 			  		<a onClick={props.handleToggleProfile} className="account material-icons md-32">account_circle</a>
