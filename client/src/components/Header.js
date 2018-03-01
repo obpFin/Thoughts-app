@@ -15,8 +15,7 @@ class Header extends React.Component {
   };
 
   handleTitleClick = () => {
-    //todo: location == development || production
-    window.location.href = 'http://localhost:8080';
+    this.props.history.push('/');
   };
 
   handleToggleThought = () => {
