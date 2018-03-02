@@ -8,6 +8,10 @@ html{
 	  background-color: #f5f5f5;
 		font-family: $main-font;
 
+		a:hover {
+			cursor: pointer;
+		}
+
 		#app {
 			height: 100vh;
 			width: 100vw;
@@ -25,6 +29,32 @@ html{
 	}
 
 	.main-color {
+		color: $main-color;
+	}
+
+	.darken.blue {
+		color: darken($main-color,30%);
+	}
+
+	.material-icons.md-24 {
+		font-size: 18px;
+	}
+	.material-icons.md-32 {
+	  padding-right: 0.5em;
+		font-size: 2.5em;
+	}
+	.material-icons.md-36 {
+		font-size: 36px;
+	}
+	.material-icons.md-36 {
+		font-size: 42px;
+	}
+	.material-icons.md-32.settings {
+		padding-right: 0.2em;
+		padding-left: 1em;
+	}
+
+	.material-icons.blue, p.blue, span.blue {
 		color: $main-color;
 	}
 }

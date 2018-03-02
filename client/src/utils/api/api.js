@@ -7,8 +7,9 @@ const token = () => {
   const user = sessionStorage.getItem('user')
   if (user) {
     return JSON.parse(user).jwt;
+  } else {
+    return null;
   }
-  return null;
 }
 
 const login = (credentials,loginSucceed) => {
@@ -30,14 +31,13 @@ const login = (credentials,loginSucceed) => {
     })
     .catch((error) => {
       reject(error);
-      console.log(error);
+      console.error(error);
     });
   });
 }
 
 const logOut = () => {
   if (sessionStorage.getItem('user')) {
-    //sessionStorage.removeItem('user');
     let jwt = token()
     return axios.delete(`${apiUrl}/users/me/token`, {
       headers: {
@@ -45,7 +45,12 @@ const logOut = () => {
       }
     })
     .then((response) => {
-      return token();
+      sessionStorage.removeItem('user');
+      if (sessionStorage.getItem('user')) {
+        console.error("logout failed");
+        return Promise.reject();
+      }
+      return true;
     })
     .catch((error) => {
       return Promise.reject();
@@ -61,7 +66,7 @@ const allThoughts = () => {
       resolve(response.data.thoughts);
     })
     .catch(function (error) {
-      console.log("response",error);
+      console.error("response",error);
       reject(error);
     });
   });
@@ -79,6 +84,7 @@ const userInfo = () => {
       resolve(response.data);
     })
     .catch((error) => {
+      console.warn(error);
       reject(error);
     });
   });

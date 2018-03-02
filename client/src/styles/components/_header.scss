@@ -47,17 +47,6 @@
 			position: absolute;
 	  	right: 1em;
 	  	div {
-	  		.material-icons.md-24 {
-					font-size: 18px;
-				}
-				.material-icons.md-32 {
-				  padding-right: 0.5em;
-					font-size: 2.5em;
-				}
-				.material-icons.md-32.settings {
-					padding-right: 0.2em;
-					padding-left: 1em;
-				}
 				@media (max-width: 414px) {
 					.material-icons.md-32.settings {
 						padding-left: 0;

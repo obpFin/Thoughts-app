@@ -15,7 +15,7 @@ const AppRouter = () => (
         <Route exact path="/" component={ThoughtsApp} />
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
-        <Route component={NotFoundPage} />
+        <Route component={Login} />
       </Switch>
     </div>
   </BrowserRouter>

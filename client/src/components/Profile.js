@@ -22,7 +22,8 @@ export default class Profile extends React.Component {
       });
     })
     .catch((error) => {
-      this.props.history.push('/404');
+      console.warn("could not find user info");
+      this.props.history.push('/login');
     });
   };
 

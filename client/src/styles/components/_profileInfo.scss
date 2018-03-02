@@ -1,4 +1,21 @@
-.profile-info-container {
-	display: flex;
-  justify-content: space-between;
+.profile.info-container {
+  div {
+  	margin: $base_margin /2 $base_margin;
+  	padding: 40px;
+  	max-width: 100%;
+  	background-color: white;
+
+  	.profile.node {
+  		margin-left: $base_margin;
+  		.edit {
+  			&:hover {
+  				cursor: pointer;
+  			}
+  		}
+  	}
+  }
+
+  a {
+  	margin: $base_margin $base_margin 0 $base_margin;
+  }
 }
