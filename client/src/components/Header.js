@@ -78,7 +78,7 @@ class Header extends React.Component {
     	</table>
       <DropDown 
         menuActive={this.state.settingsOpen}
-        handleLogOut={this.props.handleLogOut}
+        handleLogOut={this.handleLogOut}
         handleToggleSettings={this.handleToggleSettings}
       />
     	</div>

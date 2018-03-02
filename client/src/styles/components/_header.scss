@@ -3,77 +3,74 @@
 	position: relative;
 	top: 0;
 	height: 85px;
-}
-.settings-backdrop {
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	opacity: 0;
-	z-index: 2;
-}
+	.settings-backdrop {
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		opacity: 0;
+		z-index: 2;
+	}
+	.header {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-color: $main-color;
+		color: white;
+		display:flex;
+	  align-items: center;
 
-.header {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	background-color: $main-color;
-	color: white;
-	display:flex;
-  align-items: center;
+	  div {
+	   	display: flex;
+	   	align-items: center;
+	  }
 
-  div {
-   	display: flex;
-   	align-items: center;
-  }
-}
+	  td {
+	  	.title:hover, .add-thought:hover, .account:hover, .settings:hover {
+				cursor: pointer;
+			}
+			.title {
+				padding-left: 0.5em;
+				padding-right: 0.2em;
+				font-size: 36px;
 
-.title:hover, .add-thought:hover, .account:hover, .settings:hover {
-	cursor: pointer;
-}
+				@media (max-width: 375px) {
+					font-size: 22px;
+				}
 
-.title {
-	padding-left: 0.5em;
-	padding-right: 0.2em;
-	font-size: 36px;
-}
+				@media (max-width: 320px) {
+					font-size: 18px;
+				}
+			}
+	  }
 
-.welcome-text {
-	margin: 0 auto;
-}
-
-.upper-menu {
-	 position: absolute;
-   right: 1em;
-}
-
-.material-icons.md-24 {
-	font-size: 18px;
-}
-
-.material-icons.md-32 {
-  padding-right: 0.5em;
-	font-size: 2.5em;
-}
-
-.material-icons.md-32.settings {
-	padding-right: 0.2em;
-	padding-left: 1em;
-}
-
-@media (max-width: 414px) {
-	.material-icons.md-32.settings {
-		padding-left: 0;
+	  .upper-menu {
+			position: absolute;
+	  	right: 1em;
+	  	div {
+	  		.material-icons.md-24 {
+					font-size: 18px;
+				}
+				.material-icons.md-32 {
+				  padding-right: 0.5em;
+					font-size: 2.5em;
+				}
+				.material-icons.md-32.settings {
+					padding-right: 0.2em;
+					padding-left: 1em;
+				}
+				@media (max-width: 414px) {
+					.material-icons.md-32.settings {
+						padding-left: 0;
+					}
+	  		}
+			}
+			.welcome-text {
+				margin: 0 auto;
+			}
+		}
 	}
 }
 
-@media (max-width: 375px) {
-	.title {
-		font-size: 22px;
-	}
-}
 
-@media (max-width: 320px) {
-	.title {
-		font-size: 18px;
-	}
-}
+
+
