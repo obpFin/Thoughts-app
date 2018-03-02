@@ -191,10 +191,10 @@ describe('GET /thoughts/all', () => {
   });
 });
 
-describe('GET /thoughts', () => {
+describe('GET /thoughts/me', () => {
   it('should get all the users thoughts', (done) => {
     chai.request(app)
-      .get('/thoughts')
+      .get('/thoughts/me')
       .set('x-auth', users[0].tokens[0].token)
       .end((err,res) => {
         expect(res).to.have.status(200);

@@ -50,8 +50,8 @@ app.get('/thoughts/all', (req,res) => {
 	});
 });
 
-//GET /thoughts
-app.get('/thoughts', authenticate, (req,res) => {
+//GET /thoughts/me
+app.get('/thoughts/me', authenticate, (req,res) => {
 	Thought.find({
 		_creatorId: req.user._id
 	}).then((thoughts) => {
