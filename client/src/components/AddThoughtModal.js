@@ -36,6 +36,7 @@ export default class AddThoughtModal extends React.Component {
 	      onRequestClose={this.props.handleToggleThought}
 	      closeTimeoutMS={200}
 	      className="modal"
+	      appElement={document.getElementById('app')}
 	  	>
 	      <h3 className="modal-title">Share a thought!</h3>
 	      <form onSubmit={this.handleSubmit}>
