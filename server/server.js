@@ -154,7 +154,7 @@ app.delete('/thoughts/:id', authenticate, (req,res) => {
 
 //GET /users/me
 app.get('/users/me', authenticate, (req,res) => {
- 	res.send(req.user);
+ 	res.send(_.pick(req.user, ['userName', 'email']));
 });
 
 //POST /users/login {email, password}

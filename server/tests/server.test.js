@@ -122,7 +122,7 @@ describe('GET users/me', () => {
           return done(err);
         }
         expect(res).to.have.status(200);
-        expect(res.body._id).to.equal(users[0]._id.toHexString());
+        expect(res.body.userName).to.equal(users[0].userName);
         expect(res.body.email).to.equal(users[0].email);
         done();
       });
