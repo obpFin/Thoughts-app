@@ -10,7 +10,7 @@ class Header extends React.Component {
 
   state = {
     addThoughtOpen: false,
-    accountOpen: false,
+    profileOpen: false,
     settingsOpen: false
   };
 
@@ -39,7 +39,13 @@ class Header extends React.Component {
   };
 
   handleToggleProfile = () => {
-    this.props.history.push('/profile');
+    this.state.profileOpen ?
+      this.props.history.push('/')
+      :
+      this.props.history.push('/profile');
+    this.setState(() => ({
+      profileOpen: !this.state.profileOpen
+    }));
   };
 
   handleToggleSettings = () => {

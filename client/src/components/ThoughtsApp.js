@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { apiUrl } from './../utils/utils';
-import { login, logOut, allThoughts, profileThoughts } from './../utils/api/api';
+import { getUser, login, logOut, allThoughts, profileThoughts } from './../utils/api/api';
 import Header from './Header';
 import ThoughtContainer from './ThoughtContainer';
 import Thought from './Thought';
@@ -17,25 +17,21 @@ export default class ThoughtsApp extends React.Component {
 
 	state = {
     thoughts: null,
-    session: null,
-    userName: null,
-    indexOpen: true,
-    profileOpen: false
+    session: null
   };
 
-  showThoughts = () => {
-    let user = window.sessionStorage.getItem('user');
+  setSession = () => {
+    let user = getUser();
     if (user) {
       this.setState({
         session: true,
         userName:user.user
       });
-      this.getThoughts();
       return true;
+    } else {
+      this.props.history.push('/login');
     }
-    this.props.history.push('/login');
-    return null;
-  };
+  }
 
   getThoughts = () => {
    	allThoughts()
@@ -47,16 +43,14 @@ export default class ThoughtsApp extends React.Component {
   };
 
   componentDidMount() {
-    this.showThoughts();
+    this.setSession();
+    this.getThoughts();
   };
 
 	render() {
 		return (
 			<div className="main-wrapper">
-				{this.state.profileOpen &&
-					<Profile/>
-				}
-				{ this.state.session &&
+				{ this.state.session && this.state.thoughts &&
           <ThoughtContainer 
           thoughts={this.state.thoughts} 
           userName={this.state.userName ? this.state.userName : "Stranger"}

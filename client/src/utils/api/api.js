@@ -12,6 +12,15 @@ const token = () => {
   }
 }
 
+const getUser = () => {
+  const user = sessionStorage.getItem('user')
+  if (user) {
+    return JSON.parse(user);
+  } else {
+    return null;
+  }
+}
+
 const login = (credentials,loginSucceed) => {
 	var self = this;
   return new Promise((resolve, reject) => {
@@ -97,4 +106,4 @@ const isLoggedIn = () => {
   return false;
 }
 
-export { login, logOut, allThoughts, userInfo, isLoggedIn };
+export { getUser, login, logOut, allThoughts, userInfo, isLoggedIn };
