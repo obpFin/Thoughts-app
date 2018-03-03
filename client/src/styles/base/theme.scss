@@ -5,6 +5,7 @@ $main-font: 'Enriqueta', serif;
 // colors
 $main-color: #a3bed7;
 $secondary-color: #edf4fe;
+$darker-main: darken($main-color, 30%);
 
 // margins
 $base_margin: 40px;
