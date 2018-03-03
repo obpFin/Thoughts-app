@@ -10,8 +10,8 @@ export default (state = thoughtsReducerDefaultState, action) => {
     case 'REMOVE_THOUGHT':
       return state.filter(({ id }) => id !== action.id);
     case 'EDIT_THOUGHT':
-      return state.map((expense) => {
-        if (expense.id === action.id) {
+      return state.map((thought) => {
+        if (thought.id === action.id) {
           return {
             ...thought,
             ...action.updates

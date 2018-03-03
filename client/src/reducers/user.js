@@ -6,16 +6,17 @@ const userReducerDefaultState = {
 
 export default (state = userReducerDefaultState, action) => {
   switch (action.type) {
-    case 'SET_USER_USERNAME':
+    case 'SET_USER':
       return {
         ...state,
-        userName: action.userName
+        userName: action.userName,
+        email: action.email
       };
-    case 'SET_USER_EMAIL':
-    return {
-      ...state,
-      userName: action.email
-    };
+    case 'EDIT_USER':
+      return {
+        ...state.user,
+        ...action.updates
+      };
     default:
       return state;
   }
