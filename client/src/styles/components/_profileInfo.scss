@@ -13,6 +13,9 @@
 				input[type='text'] {
 					width: 400px;
 					padding: 5px;
+					&:not([disabled]) {
+						border: solid 2px $main-color;
+					}
 					@media screen and (max-width : 570px) {
 						width: 80%;
 					}
