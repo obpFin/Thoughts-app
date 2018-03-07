@@ -20,7 +20,25 @@ import { withRouter } from "react-router-dom";
 			});
 		}
 	}
-	componentDidMount() {
+	handleClickUserNameLabel = (e) => {
+		/*
+		this.state.userName != this.props.userName 
+		&&
+		this.saveUserName;
+		*/
+		this.setState({
+			editUserName: !this.state.editUserName
+		});
+	}
+	handleClickEmailLabel = (e) => {
+		/*
+		this.state.email != this.props.email 
+		&&
+		this.saveEmail;
+		*/
+		this.setState({
+			editEmail: !this.state.editEmail
+		});
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.user != this.state.user) {
@@ -36,15 +54,15 @@ import { withRouter } from "react-router-dom";
 					<div className="info cell">
 						<p className="darken blue">Usename</p>
 						<div>
-							<input type="text" value={userName} onChange={this.handleChange} />
-							<i>edit</i>
+							<input type="text" value={userName} onChange={this.handleChange} disabled={!this.state.editUserName}/>
+							{ this.state.editUserName ? <i onClick={this.handleClickUserNameLabel}>save</i> : <i onClick={this.handleClickUserNameLabel}>edit</i>}
 						</div>
 					</div>
 					<div className="info cell">
 						<p className="darken blue">Email</p>
 						<div>
-							<input type="text" value={email} onChange={this.handleChange} />
-							<i>edit</i>
+							<input type="text" value={email} onChange={this.handleChange} disabled={!this.state.editEmail}/>
+						{ this.state.editEmail ? <i onClick={this.handleClickEmailLabel}>save</i> : <i onClick={this.handleClickEmailLabel}>edit</i>}
 						</div>
 					</div>
 				</div>
