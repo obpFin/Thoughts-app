@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 
 import { apiUrl } from './../utils/utils';
+import { allThoughts } from './../utils/api/api';
 
 export default class AddThoughtModal extends React.Component {
 
@@ -19,7 +20,7 @@ export default class AddThoughtModal extends React.Component {
 				data: { text:inputValue } 
 			})
 	    .then(function(response) {
-				self.props.getThoughts();
+				allThoughts();
 				self.props.handleToggleThought();
 	    })
 	    .catch(function (error) {
