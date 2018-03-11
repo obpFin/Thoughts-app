@@ -4,6 +4,7 @@ import { apiUrl } from './../utils';
 //Session
 
 const token = () => {
+  
   const user = sessionStorage.getItem('user')
   if (user) {
     return JSON.parse(user).jwt;
@@ -33,7 +34,8 @@ const login = (credentials,loginSucceed) => {
         sessionStorage.setItem('user', JSON.stringify({
           loggedIn: true,
           userName: response.data.user.userName,
-          jwt: response.data.token
+          jwt: response.data.token,
+          _id:response.data.user._id
         }));
         resolve(response.data.user);
       }
@@ -46,7 +48,7 @@ const login = (credentials,loginSucceed) => {
 }
 
 const logOut = () => {
-  if (sessionStorage.getItem('user')) {
+  if (isLoggedIn()) {
     let jwt = token()
     return axios.delete(`${apiUrl}/users/me/token`, {
       headers: {
@@ -66,6 +68,25 @@ const logOut = () => {
       console.log(error);
     });
   }
+}
+
+const updateUser = (userName,email) => {
+  let jwt = token();
+  let user = getUser();
+  return new Promise((resolve, reject) => {
+    axios.patch(`${apiUrl}/users/${user._id}`,
+    {
+      userName,
+      email
+    },{
+      headers: {
+        'x-auth': jwt 
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+  })  
 }
 
 const allThoughts = () => {
@@ -106,4 +127,4 @@ const isLoggedIn = () => {
   return false;
 }
 
-export { getUser, login, logOut, allThoughts, userInfo, isLoggedIn };
+export { getUser, login, logOut, updateUser, allThoughts, userInfo, isLoggedIn };

@@ -28,7 +28,7 @@ class Login extends React.Component {
   };
 
   handleAnynomousLogin = () => {
-    let credentials = {email: "test35464@example.com", password: "123456"};
+    let credentials = {email: "testuser@mail.com", password: "123456"};
     login(credentials)
     .then((user) => {
       if (window.sessionStorage.getItem('user')) {

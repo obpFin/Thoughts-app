@@ -1,43 +1,51 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
+import { userInfo, updateUser } from '../utils/api/api';
 
  class ProfileInfo extends React.Component {
 	 state = {
 		 user: {
+			onLoadUserName: this.props.user.userName,
+			onLoadEmail: this.props.user.email,
 			userName: this.props.user.userName || '',
 			email: this.props.user.email || ''
 		 },
-		 editUserName: false,
-		 editEmail: false
+		 editing: false
 	 }
 	pushBack = () => {
     this.props.history.push('/');
 	};
-	setUser = (user) => {
-		if (user) {
+	setUser = (userData) => {
+		if (userData) {
+			let user = {
+				...userData,
+				onLoadUser: userData.userName,
+				onLoadEmail: userData.email
+			}
 			this.setState({
 				user
 			});
 		}
 	}
-	handleClickUserNameLabel = (e) => {
-		/*
-		this.state.userName != this.props.userName 
-		&&
-		this.saveUserName;
-		*/
-		this.setState({
-			editUserName: !this.state.editUserName
-		});
+	onChangeUserName = (e) => {
+		const user = {...this.state.user};
+		user.userName = e.target.value
+    this.setState(() => ({ user }));
 	}
-	handleClickEmailLabel = (e) => {
-		/*
-		this.state.email != this.props.email 
-		&&
-		this.saveEmail;
-		*/
+	onChangeEmail = (e) => {
+		const user = {...this.state.user};
+		user.email = e.target.value
+    this.setState(() => ({ user }));
+	}
+	handleClickLabel = (e) => {
+		if (this.state.editing) {
+			let { userName, email, onLoadUser, onLoadEmail } = this.state.user;
+			if (onLoadUser !== userName || onLoadEmail !== email) {
+				updateUser(userName, email);
+			}
+		}
 		this.setState({
-			editEmail: !this.state.editEmail
+			editing: !this.state.editing
 		});
 	}
 	componentWillReceiveProps(nextProps) {
@@ -54,15 +62,15 @@ import { withRouter } from "react-router-dom";
 					<div className="info cell">
 						<p className="darken blue">Usename</p>
 						<div>
-							<input type="text" value={userName} onChange={this.handleChange} disabled={!this.state.editUserName}/>
-							{ this.state.editUserName ? <i onClick={this.handleClickUserNameLabel}>save</i> : <i onClick={this.handleClickUserNameLabel}>edit</i>}
+							<input type="text" value={userName} onChange={this.onChangeUserName} disabled={!this.state.editing}/>
+							{ this.state.editing ? <i onClick={this.handleClickLabel}>save</i> : <i onClick={this.handleClickLabel}>edit</i>}
 						</div>
 					</div>
 					<div className="info cell">
 						<p className="darken blue">Email</p>
 						<div>
-							<input type="text" value={email} onChange={this.handleChange} disabled={!this.state.editEmail}/>
-						{ this.state.editEmail ? <i onClick={this.handleClickEmailLabel}>save</i> : <i onClick={this.handleClickEmailLabel}>edit</i>}
+							<input type="text" value={email} onChange={this.onChangeEmail} disabled={!this.state.editing}/>
+						{ this.state.editing ? <i onClick={this.handleClickLabel}>save</i> : <i onClick={this.handleClickLabel}>edit</i>}
 						</div>
 					</div>
 				</div>
