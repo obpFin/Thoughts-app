@@ -123,6 +123,25 @@ app.patch('/thoughts/:id', authenticate, (req,res) => {
 	});
 });
 
+//PATCH /users/:id
+app.patch('/users/:id', authenticate, (req,res) => {
+	req.body.userName = req.sanitize(req.body.userName);
+	req.body.email = req.sanitize(req.body.email);
+	var id = req.params.id;
+	var body = _.pick(req.body, ['userName', 'email']);
+	if (!ObjectId.isValid(id) || req.user._id != id) {
+		return res.status(404).send();
+	}
+	User.findOneAndUpdate({_id: id}, {$set: body}, {new: true}).then((user) => {
+		if (!user) {
+			return res.sendStatus(404);
+		}
+		res.send({user});
+	}).catch((e) => {
+		res.status(400).send();
+	});
+});
+
 //GET /users
 app.get('/users',(req,res) => {
 	User.find().then((docs) => {

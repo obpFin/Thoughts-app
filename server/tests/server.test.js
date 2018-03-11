@@ -305,3 +305,44 @@ describe('PATCH /thoughts/:id', () => {
         });
   });
 });
+
+describe('PATCH /users/:id', () => {
+  it('should update user',(done) => {
+    var hexId = users[1]._id.toHexString();
+    var userName = 'username';
+    var email = 'email';
+
+      chai.request(app)
+        .patch(`/users/${hexId}`)
+        .set('x-auth', users[1].tokens[0].token)
+        .send({
+          userName, email
+        })
+        .end((err,res) => {
+          expect(res).to.have.status(200);
+            expect(res.body.user.userName).to.be.a('string');
+            expect(res.body.user.userName).to.equal(userName);
+            expect(res.body.user.email).to.be.a('string');
+            expect(res.body.user.email).to.equal(email);
+            done();
+        });
+
+  });
+
+  it('should not update the thought created by other user',(done) => {
+    var hexId = users[0]._id.toHexString();
+    var userName = 'username';
+    var email = 'email';
+
+      chai.request(app)
+        .patch(`/users/${hexId}`)
+        .set('x-auth', users[1].tokens[0].token)
+        .send({
+          userName, email
+        })
+        .end((err,res) => {
+          expect(res).to.have.status(404);
+          done();
+        });
+  });
+});
