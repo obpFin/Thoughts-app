@@ -5,26 +5,31 @@ import {withRouter} from "react-router-dom";
 
 class CreateAccount extends React.Component {
 
-
-
+  handleLoginPageClick = () => {
+    this.props.history.push('/login');
+  }
 
 	render() {
 		return (
-    	<div className="new-account">
-    		<p className="">Create new Account</p>
+    	<section className="new-account">
+    		<p id="title">Create new account</p>
     		<form onSubmit={this.handleSubmit} className="form">
 				  <div>
 					  <input name="username" type="text" placeholder="Username" autoComplete="login username" />
 					</div>
 				  <div>
 					  <input name="password" type="password" placeholder="Password" autoComplete="password" />
-					  <input name="password-confirm" type="password" placeholder="Password" autoComplete="password" />
 					</div>
+          <div>
+            <input name="password-confirm" type="password" placeholder="Confirm password" autoComplete="password" />
+          </div>
 					<div>
-				  	<input id="submit-form" type="submit" value="Submit" />
+				  	<input id="" className="submit create-user" type="submit" value="Submit" />
 				  </div>
 				</form>
-			</div>
+        <p>Have an account? <span><a href="#" onClick={() => this.handleLoginPageClick()}>Log in</a></span></p>
+
+			</section>
 		);
 	}
 }

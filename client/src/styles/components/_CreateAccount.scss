@@ -1,0 +1,22 @@
+section.new-account {
+  position: relative;
+  top: 20%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  p#title {
+    font-size: 1.5em;
+  }
+  form {
+    div {
+      margin-bottom: 5px;
+      input {
+        width: 17em;
+      }
+      input.create-user {
+        width: 17em;
+        height: 2em;
+      }
+    }
+  }
+}

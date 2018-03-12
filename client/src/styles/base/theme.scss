@@ -9,3 +9,21 @@ $darker-main: darken($main-color, 30%);
 
 // margins
 $base_margin: 40px;
+
+// buttons
+input.submit {
+  background: $main-color;
+	color: white;
+	letter-spacing: 2px;
+	font-weight: 500;
+}
+
+// links
+a {
+	color: $darker-main;
+}
+
+// base text
+p {
+	font-family: $main-font;
+}
