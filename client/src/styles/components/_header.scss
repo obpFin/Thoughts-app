@@ -47,6 +47,9 @@
 			position: absolute;
 	  	right: 1em;
 	  	div {
+				.material-icons {
+					color: white;
+				}
 				@media (max-width: 414px) {
 					.material-icons.md-32.settings {
 						padding-left: 0;

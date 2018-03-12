@@ -40,7 +40,7 @@ class Login extends React.Component {
 
 	render() {
 		    return (
-    	<div className="login-container">
+    	<section className="login-container">
     		<p className="login-title">Log into Thoughts</p>
     		<form onSubmit={this.handleLoginSubmit} className="login-form">
 				  <div>
@@ -50,12 +50,12 @@ class Login extends React.Component {
 					  <input name="password" type="password" placeholder="Password" autoComplete="login password" />
 					</div>
 					<div>
-				  	<input id="submit-form" type="submit" value="Log in" />
+				  	<input id="submit-form" className="submit" type="submit" value="Log in" />
 				  </div>
 				</form>
 				<a href="#" onClick={() => this.createAccount()}>Create Account</a>
 				<a href="#" onClick={() => this.handleAnynomousLogin()}>I just want to take a look around</a>
-			</div>
+			</section>
 		);
 	}
 }
