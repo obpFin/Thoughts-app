@@ -320,11 +320,11 @@ describe('PATCH /users/:id', () => {
         })
         .end((err,res) => {
           expect(res).to.have.status(200);
-            expect(res.body.user.userName).to.be.a('string');
-            expect(res.body.user.userName).to.equal(userName);
-            expect(res.body.user.email).to.be.a('string');
-            expect(res.body.user.email).to.equal(email);
-            done();
+          expect(res.body.user.userName).to.be.a('string');
+          expect(res.body.user.userName).to.equal(userName);
+          expect(res.body.user.email).to.be.a('string');
+          expect(res.body.user.email).to.equal(email);
+          done();
         });
 
   });
@@ -345,4 +345,22 @@ describe('PATCH /users/:id', () => {
           done();
         });
   });
+
+  describe('DELETE /users/me/token', () => {
+  it('should remove auth token on logout', (done) => {
+    chai.request(app)
+      .delete('/users/me/token')
+      .set('x-auth', users[0].tokens[0].token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        if (err) {
+          return done(err)
+        }
+        User.findById(users[0]).then((user) => {
+          expect(user.tokens).to.have.lengthOf(0);
+          done();
+        }).catch((e) => done(e));
+      });
+  });
+});
 });
