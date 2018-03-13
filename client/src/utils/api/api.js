@@ -4,7 +4,6 @@ import { apiUrl } from './../utils';
 //Session
 
 const token = () => {
-  
   const user = sessionStorage.getItem('user')
   if (user) {
     return JSON.parse(user).jwt;
@@ -29,8 +28,8 @@ const login = (credentials,loginSucceed) => {
       email: credentials.email,
       password: credentials.password
     })
-    .then(function (response) {
-      if (response.data.token) {
+    .then((response) => {
+      if (response.status === 200 && response.data.token) {
         sessionStorage.setItem('user', JSON.stringify({
           loggedIn: true,
           userName: response.data.user.userName,
@@ -41,8 +40,8 @@ const login = (credentials,loginSucceed) => {
       }
     })
     .catch((error) => {
-      reject(error);
       console.error(error);
+      reject(error);
     });
   });
 }
@@ -50,24 +49,41 @@ const login = (credentials,loginSucceed) => {
 const logOut = () => {
   if (isLoggedIn()) {
     let jwt = token()
-    return axios.delete(`${apiUrl}/users/me/token`, {
-      headers: {
-        'x-auth': jwt 
-      }
-    })
-    .then((response) => {
-      sessionStorage.removeItem('user');
-      if (sessionStorage.getItem('user')) {
+    return new Promise((resolve,reject) => {
+      axios.delete(`${apiUrl}/users/me/token`, {
+        headers: {
+          'x-auth': jwt 
+        }
+      })
+      .then((response) => {
+        sessionStorage.removeItem('user');
+        if (response.status === 200 && !sessionStorage.getItem('user')) {
+          resolve(response);
+        } else {
+          console.error("session removal failed");
+          return Promise.reject();
+        }
+      })
+      .catch((error) => {
         console.error("logout failed");
         return Promise.reject();
-      }
-      return true;
-    })
-    .catch((error) => {
-      return Promise.reject();
-      console.log(error);
+      });
     });
   }
+}
+
+const createAccount = (user) => {
+  return new Promise((resolve,reject) => {
+    axios.post(`${apiUrl}/users`, user)
+    .then((user) => {
+      if (user) {
+        resolve(user);
+      }
+    }).catch((error) => {
+      console.error(error);
+      reject(error);
+    });
+  });
 }
 
 const updateUser = (userName,email) => {
@@ -84,8 +100,13 @@ const updateUser = (userName,email) => {
       },
     })
     .then((response) => {
-      console.log(response);
-    })
+      if (response) {
+        resolve(response);
+      }
+    }).catch((error) => {
+      console.error(error);
+      reject(error);
+    });
   })  
 }
 
@@ -127,4 +148,4 @@ const isLoggedIn = () => {
   return false;
 }
 
-export { getUser, login, logOut, updateUser, allThoughts, userInfo, isLoggedIn };
+export { getUser, login, logOut, createAccount, updateUser, allThoughts, userInfo, isLoggedIn };
