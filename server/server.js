@@ -5,6 +5,7 @@ const express = require('express');
 const expressSanitizer = require('express-sanitizer');
 const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
+var helmet = require('helmet');
 
 const {mongoose} = require('./db/mongoose');
 const {Thought} = require('./models/thought');
@@ -16,6 +17,7 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(expressSanitizer());
+app.use(helmet());
 app.use(function(req, res, next) {
 res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,PATCH,DELETE");
