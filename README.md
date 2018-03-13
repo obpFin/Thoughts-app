@@ -8,6 +8,7 @@
 - JSON Web Tokens
 - Bcrypt hashing
 - Express Sanitizer
+- Helmet.js
 
 #### Testing
 - Mocha
