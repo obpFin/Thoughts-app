@@ -20,7 +20,6 @@ class Login extends React.Component {
           userName,
           session: true
         }));
-        this.console.log(props.history);
         this.props.history.push('/');
         console.log("login succeed",sessionStorage.getItem('user'));
       }
