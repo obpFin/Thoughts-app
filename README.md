@@ -1,7 +1,12 @@
 *a fully responsive SPA to share your thoughts!*
 
-# Server
+Server status:
+- Frontend Online
+- API Offline
 
+# API
+
+- AWS EC2
 - Express.js
 - Mongodb w/ Mongoose.js
 #### Security
@@ -17,6 +22,7 @@
 
 # Client
 
+- AWS S3
 - React.js
 - Redux
 - Webpack
