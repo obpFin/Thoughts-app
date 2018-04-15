@@ -54,7 +54,6 @@ class CreateAccount extends React.Component {
           .then((userName) => {
             if (userName) {
               this.props.history.push('/');
-              console.log("login succeed",sessionStorage.getItem('user'));
             }
           });
         }
