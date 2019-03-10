@@ -1,8 +1,8 @@
 *a fully responsive SPA to share your thoughts!*
 
 Server status:
-- Frontend Online
-- API Offline
+- Frontend offline
+- API offline
 
 # API
 
